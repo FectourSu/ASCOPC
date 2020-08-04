@@ -56,15 +56,14 @@ body {
     font-size: 14px;
     -ms-text-size-adjust: 100%;
     -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    overflow-y: hidden;
     overflow-x: hidden;
+    color: #2d2d2d;
 }
 
 input,
 button,
 textarea {
-    font-family: "Roboto";
+    font-family: "Montserrat";
 }
 
     input::-ms-clear {
@@ -101,10 +100,11 @@ h5,
 h6 {
     font-weight: inherit;
     font-style: inherit;
+    margin: 0;
 }
 
 #blazor-error-ui {
-    background: lightyellow;
+    background: #614c99;
     bottom: 0;
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
     display: none;
@@ -113,6 +113,8 @@ h6 {
     position: fixed;
     width: 100%;
     z-index: 1000;
+    color: white;
+    font-family: "Montserrat thin";
 }
 
     #blazor-error-ui .dismiss {
@@ -121,3 +123,223 @@ h6 {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+/* MAIN */
+.asco-wrap {
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 0 3.125em;
+}
+/*      */
+
+/* HEADER */
+.asco-title__subtitle {
+    color: #946bf9;
+}
+.header__container__text h1{
+    font-size: 2.5em;
+}
+.header__container__arrow {
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding-left: 20px;
+    margin: 2rem 0 0 0;
+}
+@-webkit-keyframes scroll-inner {
+    from {
+        margin-top: 15%;
+    }
+
+    to {
+        margin-top: 50%;
+    }
+}
+
+@keyframes scroll-inner {
+    from {
+        margin-top: 15%;
+    }
+
+    to {
+        margin-top: 50%;
+    }
+}
+
+@-webkit-keyframes scroll-mouse {
+    from {
+        margin-top: 0;
+    }
+
+    to {
+        margin-top: 15px;
+    }
+}
+
+@keyframes scroll-mouse {
+    from {
+        margin-top: 0;
+    }
+
+    to {
+        margin-top: 15px;
+    }
+}
+
+div.mouse {
+    position: relative;
+    margin: 0 auto;
+    display: block;
+    width: 50px;
+    height: 80px;
+    border: solid 2px #946bf9;
+    border-radius: 25px;
+    -webkit-animation: scroll-mouse 1.5s;
+    animation: scroll-mouse 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    zoom: 0.5;
+}
+
+    div.mouse span.scroll-down {
+        display: block;
+        width: 10px;
+        height: 10px;
+        background: #946bf9;
+        border-radius: 50%;
+        margin: 15% auto auto auto;
+        -webkit-animation: scroll-inner 1.5s;
+        animation: scroll-inner 1.5s;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-timing-function: ease;
+        animation-timing-function: ease;
+    }
+
+.header__container{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+}
+.header__container__text {
+    letter-spacing: .3em;
+    line-height: 1.6em;
+    font-family: "Montserrat Regular";
+    text-transform: uppercase;
+    font-weight: 400;
+    text-align: left;
+    margin: 2rem 0 0 0;
+    width: 100%;
+}
+.asco-wrap header {
+    padding-top: 6.25em;
+    margin-bottom: 6.125em;
+    text-align: left;
+    font-size: 1rem;
+}
+.asco-logo{
+    width: 50px;
+    height: 50px;
+}
+/*        */
+
+/* PC CONTAINER */
+.asco-container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+}
+.asco-container__pc__text {
+    position: absolute;
+    height: 80px;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9em;
+    text-align: center;
+    font-family: "Montserrat Medium";
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 1px;
+}
+.t-right-1 {
+    right: -50px;
+    top: 235px;
+}
+.t-right-2 {
+    right: -44px;
+    top: 52px;
+}
+.t-right-3 {
+    right: -40px;
+    top: -90px;
+}
+
+.t-left-1 {
+    left: -17px;
+    top: 259px;
+}
+.t-left-2 {
+    left: -52px;
+    top: 154px;
+}
+.t-left-3 {
+    left: -4px;
+    top: -12px;
+}
+@media (max-width:740px) {
+    .asco-container__pc{
+        zoom: 0.8;
+    }
+    .header__container__text h1 {
+        font-size: 2em;
+    }
+}
+@media (max-width:600px) {
+    .asco-container__pc {
+        zoom: 0.6;
+    }
+
+    .header__container__text h1 {
+        font-size: 1.5em;
+    }
+    .asco-container__pc__text {
+        font-size: 1em;
+    }
+}
+@media (max-width:450px) {
+    .asco-container__pc {
+        zoom: 0.4;
+    }
+    .asco-wrap {
+        padding: 0 2.125em;
+    }
+    .header__container__arrow {
+        position: absolute;
+        text-align: center;
+        align-items: center;
+        right: 0;
+        left: 0;
+    }
+
+    .header__container {
+        display: block;
+    }
+
+    .asco-wrap header {
+        margin-bottom: 9.125em;
+    }
+    .asco-container__pc__text {
+        font-size: 1.3em;
+    }
+}
+.asco-container__pc {
+    background: url(/img/ResultComputer.svg) no-repeat center;
+    width: 650px;
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+/*           */
+

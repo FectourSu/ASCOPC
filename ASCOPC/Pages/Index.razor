@@ -1,2 +1,33 @@
 ﻿@page "/"
-<h1>Hello</h1>
+@inject IJSRuntime js
+
+<div class="asco-wrap">
+    <header>
+        <img src="/img/logo.svg" class="asco-logo"/>
+        <div class="header__container">
+            <BlazorAnimate.Animate Animation="Animations.FadeUp" Duration="TimeSpan.FromSeconds(0.5)" >
+                <div class="header__container__text">
+                     <h1>Asco PC<br /><span>Build computer <br /><span class="asco-title__subtitle">your</span> dream</span></h1>
+                </div>
+            </BlazorAnimate.Animate>
+            <div class="header__container__arrow">
+                 <div class='mouse' @onclick="@(async ()=> await js.Scroll("testId"))"> 
+                    <span class='scroll-down'></span>
+                 </div>
+            </div>
+        </div>
+    </header>
+    <section class="asco-container" id="testId">
+        <div class="asco-container__pc">
+            <div class="asco-container__pc__text t-right-1">MSI Radeon RX 5700 XT</div>
+            <div class="asco-container__pc__text t-right-2">Nvidia Geforce 1050ti</div>
+            <div class="asco-container__pc__text t-right-3">Kingston HyperX Fury Black</div>
+            <div class="asco-container__pc__text t-left-1">Intel LGA1151 v2</div>
+            <div class="asco-container__pc__text t-left-2">Intel B460 Chipset mATX GM</div>
+            <div class="asco-container__pc__text t-left-3">Samsung 970 EVO</div>
+        </div>
+    </section>
+</div>
+@code{
+
+}
