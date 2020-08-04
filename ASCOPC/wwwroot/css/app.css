@@ -335,7 +335,7 @@ div.mouse {
     }
 }
 .asco-container__pc {
-    background: url("img/ResultComputer.svg") no-repeat center;
+    background: url("../img/ResultComputer.svg") no-repeat center;
     width: 650px;
     height: 400px;
     margin: 0 auto;
