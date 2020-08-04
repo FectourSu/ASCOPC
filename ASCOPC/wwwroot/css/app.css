@@ -133,6 +133,10 @@ h6 {
 /*      */
 
 /* HEADER */
+    .header__container__text h1::after {
+        content: '.';
+        color: #6a24fa;
+    }
 .header__button {
     background-color: white;
     border: 0.3px solid #946bf9;
