@@ -134,6 +134,10 @@ h6 {
 /*      */
 
 /* HEADER */
+    .header__container__text h1::after {
+        content: '.';
+        color: #6a24fa;
+    }
 .header__button {
     background-color: white;
     border: 0.3px solid #946bf9;
@@ -355,7 +359,7 @@ div.mouse {
         align-items: center;
         right: 0;
         left: 0;
-        margin-top: 130px;
+        margin-top: 140px;
     }
 
     .header__container {
@@ -366,6 +370,7 @@ div.mouse {
         background-color: #946bf9;
         color:white;
         border: 0;
+        margin: 45px auto 0 !important;
     }
     .asco-wrap header {
         margin-bottom: 10.7em;
