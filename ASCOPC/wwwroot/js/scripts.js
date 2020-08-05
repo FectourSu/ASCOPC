@@ -111,11 +111,6 @@ $(document).ready(function () {
 
 });
 
-$(document).ready(function () {
-    if (window.matchMedia("(max-width: 450px)").matches) {
-        new SmoothScroll(document, 120, 12);
-    }
-});
 
 function SmoothScroll(target, speed, smooth) {
     if (target === document)
