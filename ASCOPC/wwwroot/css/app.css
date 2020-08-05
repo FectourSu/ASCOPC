@@ -101,6 +101,7 @@ h6 {
     font-weight: inherit;
     font-style: inherit;
     margin: 0;
+    font-family: "Montserrat";
 }
 
 #blazor-error-ui {
@@ -151,15 +152,12 @@ h6 {
     font-family: "Montserrat";
     text-transform: uppercase;
     font-weight: 400;
-    transition: 0.2s;
-    -webkit-transition: 0.2s;
+    transition: 0.4s;
+    -webkit-transition: 0.4s;
 }
     .header__button:hover {
         background-color: #946bf9;
         color: white;
-        border: 0;
-        transition: 0.2s;
-        -webkit-transition: 0.2s;
     }
 .asco-title__subtitle {
     color: #946bf9 !important;
@@ -167,6 +165,10 @@ h6 {
 .header__container__text h1{
     font-size: 2.5em;
 }
+    .header__container__text h1::after {
+        content: '.';
+        color: #6a24fa;
+    }
 .header__container__text h1 span {
     color: #a5a4a4;
 }
@@ -256,7 +258,7 @@ div.mouse {
 .header__container__text {
     letter-spacing: .3em;
     line-height: 1.6em;
-    font-family: "Montserrat Regular";
+    font-family: "Montserrat";
     text-transform: uppercase;
     font-weight: 400;
     text-align: left;
@@ -289,10 +291,11 @@ div.mouse {
     text-overflow: ellipsis;
     font-size: 0.9em;
     text-align: center;
-    font-family: "Montserrat Medium";
+    font-family: "Montserrat";
     display: flex;
     flex-direction: column-reverse;
     padding-bottom: 1px;
+    font-weight: 500;
 }
 .t-right-1 {
     right: -50px;
