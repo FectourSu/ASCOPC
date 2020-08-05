@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200&display=swap');
 
 html, body {
-    font-family: 'Montserrat'
+    font-family: 'Montserrat';
+    cursor: none !important;
 }
 
 * {
@@ -12,7 +13,7 @@ html, body {
 }
 
 .button a {
-    cursor: pointer;
+    cursor: none !important;
 }
 
 *,
@@ -70,9 +71,7 @@ textarea {
         display: none;
     }
 
-button {
-    cursor: pointer;
-}
+
 
     button::-moz-focus-inner {
         padding: 0;
@@ -119,7 +118,6 @@ h6 {
 }
 
     #blazor-error-ui .dismiss {
-        cursor: pointer;
         position: absolute;
         right: 0.75rem;
         top: 0.5rem;
@@ -144,7 +142,6 @@ h6 {
     width: 250px;
     height: 48px;
     margin-top: 45px;
-    cursor: pointer;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -171,7 +168,7 @@ h6 {
 }
     .header__container__text h1::after {
         content: '.';
-        color: #6a24fa;
+        color: #946bf9;
     }
 .header__container__text h1 span {
     color: #a5a4a4;
@@ -284,7 +281,6 @@ div.mouse {
 /* PC CONTAINER */
 .asco-container {
     width: 100%;
-    height: 100%;
     margin: 0 auto;
 }
 .asco-container__pc__text {
@@ -347,6 +343,13 @@ div.mouse {
     }
 }
 @media (max-width:450px) {
+    .cursor {
+        display: none;
+    }
+
+    .cursor--canvas {
+        display: none !important;
+    }
     .asco-container__pc {
         zoom: 0.4;
     }
@@ -407,3 +410,74 @@ div.mouse {
 }
 
 /*        */
+
+/* CURSOR */
+.cursor--small {
+    width: 5px;
+    height: 5px;
+    left: -2.5px !important;
+    top: -2.5px !important;
+    border-radius: 50%;
+    z-index: 999999;
+    background: #2d2d2d;
+}
+
+.cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+}
+
+.cursor--canvas
+{
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999999;
+}
+.cursor {
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+}
+.cursor--small::after {
+    display: none !important;
+}
+/*      */
+
+/* LOADING */
+.loading-bar {
+    z-index: 50;
+    position: fixed;
+    height: .25em;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.loading-bar__wrapper {
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+    background-color: #946bf9;
+    box-shadow: 0px 0px 5px grey;
+    animation: myline 1.3s ease-in-out infinite alternate;
+    border-radius: 50px;
+}
+
+@keyframes myline {
+    0% {
+        transform: scaleX(0.1);
+        -webkit-transform: scaleX(0.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scaleX(1.0);
+        -webkit-transform: scaleX(1.0);
+        opacity: 1;
+    }
+}
+
+/*         */
