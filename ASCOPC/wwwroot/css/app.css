@@ -155,6 +155,7 @@ h6 {
     font-weight: 400;
     transition: 0.4s;
     -webkit-transition: 0.4s;
+    user-select: none;
 }
     .header__button:hover {
         background-color: #946bf9;
