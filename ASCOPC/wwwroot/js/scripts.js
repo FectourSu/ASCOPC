@@ -112,7 +112,9 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    new SmoothScroll(document, 120, 12)
+    if (window.matchMedia("(max-width: 450px)").matches) {
+        new SmoothScroll(document, 120, 12);
+    }
 });
 
 function SmoothScroll(target, speed, smooth) {
@@ -128,10 +130,8 @@ function SmoothScroll(target, speed, smooth) {
         && document.documentElement
         ? document.documentElement
         : target // safari is the new IE
-    if (window.matchMedia("(min-width: 1000px)").matches) {
         target.addEventListener('mousewheel', scrolled, { passive: false })
         target.addEventListener('DOMMouseScroll', scrolled, { passive: false })
-    } 
 
     function scrolled(e) {
 
