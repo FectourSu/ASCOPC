@@ -180,7 +180,6 @@ h6 {
     text-align: center;
     align-items: center;
     padding-left: 20px;
-    padding-right: 20px;
     margin: 2rem 0 0 0;
 }
 @-webkit-keyframes scroll-inner {
@@ -365,6 +364,7 @@ div.mouse {
         right: 0;
         left: 0;
         margin-top: 140px;
+        padding-right: 20px;
     }
 
     .header__container {
