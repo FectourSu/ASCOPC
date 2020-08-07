@@ -151,6 +151,7 @@ h6 {
     font-weight: 400;
     transition: 0.4s;
     -webkit-transition: 0.4s;
+    user-select: none;
 }
     .header__button:hover {
         background-color: #946bf9;
@@ -396,7 +397,8 @@ div.mouse {
         align-items: center;
         right: 0;
         left: 0;
-        margin-top: 160px;
+        margin-top: 140px;
+        padding-right: 20px;
     }
 
     .header__container {
