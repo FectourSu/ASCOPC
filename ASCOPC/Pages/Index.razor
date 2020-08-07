@@ -7,20 +7,40 @@
         <img src="img/logo.svg" class="asco-logo"/>
         <div class="header__container">
             <BlazorAnimate.Animate Animation="Animations.FadeUp" Duration="TimeSpan.FromSeconds(0.5)" >
-                <div class="header__container__text">
+                <div class="container__text">
                      <h1>Asco PC<br /><span>Build computer <br /><span class="asco-title__subtitle">your</span> dream</span></h1>
                 </div>
             </BlazorAnimate.Animate>
             <div class="header__container__arrow">
-                 <div class='mouse' @onclick="@(async ()=> await js.Scroll("testId"))"> 
+                 <div class='mouse' @onclick="@(async ()=> await js.Scroll("BuildId"))"> 
                     <span class='scroll-down'></span>
                  </div>
             </div>
         </div>
        <div class="header__button">RESULT CONFIG</div>
     </header>
-    <section class="asco-container" id="testId">
+    <section class="asco-container">
         <div class="asco-container__pc">
+            <svg class="progress-ring"
+                 width="120"
+                 height="120">
+                <circle class="progress-ring__circle"
+                        stroke="#946bf9"
+                        stroke-width="12"
+                        fill="transparent"
+                        r="52"
+                        cx="60"
+                        cy="60" />
+            </svg>
+            <div class="circles"></div>
+
+            <input class="counterLoad" value="0"
+                   type="number"
+                   step="20"
+                   min="0"
+                   max="100"
+                   placeholder="progress">
+
             <div class="asco-container__pc__text t-right-1">MSI Radeon RX 5700 XT</div>
             <div class="asco-container__pc__text t-right-2">Nvidia Geforce 1050ti</div>
             <div class="asco-container__pc__text t-right-3">Kingston HyperX Fury Black</div>
@@ -28,8 +48,37 @@
             <div class="asco-container__pc__text t-left-2">Intel B460 Chipset mATX GM</div>
             <div class="asco-container__pc__text t-left-3">Samsung 970 EVO</div>
         </div>
+        <div class="asco-container__price">
+            <div class="asco-container__price__title">Total price:</div>
+            <div class="asco-container__price__money">1200 $</div>
+        </div>
     </section>
+    <main>
+        <div class="main__title">
+            <div class="container__text main__text" id="BuildId">
+                <h1>Build</h1>
+            </div>
+            <select class="cs-select cs-skin-elastic" name='type' scrolling="yes">
+                <option value="" disabled selected>All</option>
+                <option value="All">All</option>
+                <option value='Motherboard'>Motherboard</option>
+                <option value='Processor'>Processor</option>
+                <option value='Graphic card'>Graphic card</option>
+                <option value='HDD'>HDD</option>
+                <option value='Culer'>Culer</option>
+                <option value='RAM'>RAM</option>
+                <option value='SSD'>SSD</option>
+            </select>
+        </div>
+    </main>
 </div>
 @code{
-
+    protected override async Task OnAfterRenderAsync(bool aftR)
+    {
+        if (aftR)
+        {
+            await js.InvokeVoidAsync("blazorSelectBox");
+        }
+        await js.InvokeVoidAsync("blazorCircleLoad");
+    }
 }

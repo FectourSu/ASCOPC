@@ -1,6 +1,13 @@
 ﻿@inherits LayoutComponentBase
-
+@inject IJSRuntime jsRuntime
 
 <div class="main">
         @Body
 </div>
+
+@code{  
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await jsRuntime.InvokeVoidAsync("blazorCursorInit");
+    }
+}

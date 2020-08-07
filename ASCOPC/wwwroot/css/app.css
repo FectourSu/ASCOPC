@@ -123,19 +123,15 @@ h6 {
         top: 0.5rem;
     }
 
-/* MAIN */
+/* Wrap */
 .asco-wrap {
     margin: 0 auto;
     max-width: 1400px;
-    padding: 0 3.125em;
+    padding: 0 4.125em;
 }
 /*      */
 
 /* HEADER */
-    .header__container__text h1::after {
-        content: '.';
-        color: #6a24fa;
-    }
 .header__button {
     background-color: white;
     border: 0.3px solid #946bf9;
@@ -163,16 +159,20 @@ h6 {
 .asco-title__subtitle {
     color: #946bf9 !important;
 }
-.header__container__text h1{
+.container__text h1{
     font-size: 2.5em;
 }
-    .header__container__text h1::after {
-        content: '.';
-        color: #946bf9;
+
+@media (min-width: 600px){
+    body {
+        overflow-y: hidden;
     }
-.header__container__text h1 span {
+}
+
+.container__text h1 span {
     color: #a5a4a4;
 }
+
 .header__container__arrow {
     justify-content: center;
     display: flex;
@@ -256,8 +256,8 @@ div.mouse {
     display:flex;
     justify-content:space-between;
 }
-.header__container__text {
-    letter-spacing: .3em;
+.container__text {
+    letter-spacing: .5em;
     line-height: 1.6em;
     font-family: "Montserrat";
     text-transform: uppercase;
@@ -268,7 +268,7 @@ div.mouse {
 }
 .asco-wrap header {
     padding-top: 6.25em;
-    margin-bottom: 6.125em;
+    margin-bottom: 7.125em;
     text-align: left;
     font-size: 1rem;
 }
@@ -279,10 +279,35 @@ div.mouse {
 /*        */
 
 /* PC CONTAINER */
+
+.asco-container__price {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1em;
+    font-weight: 200;
+    color: #2d2d2d;
+    margin-top: 4em;
+}
+
+.asco-container__price__title{
+    color: #a5a4a4;
+}
+
+.asco-container__price__money {
+    color: #2d2d2d;
+    font-weight: 300;
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .asco-container {
     width: 100%;
     margin: 0 auto;
 }
+
 .asco-container__pc__text {
     position: absolute;
     height: 80px;
@@ -326,7 +351,7 @@ div.mouse {
     .asco-container__pc{
         zoom: 0.8;
     }
-    .header__container__text h1 {
+    .container__text h1 {
         font-size: 2em;
     }
 }
@@ -334,19 +359,28 @@ div.mouse {
     .asco-container__pc {
         zoom: 0.6;
     }
-
-    .header__container__text h1 {
+    .asco-container__price{
+        font-size: 0.8em;
+    }
+    .container__text h1 {
         font-size: 1.5em;
     }
     .asco-container__pc__text {
         font-size: 1.2em;
     }
 }
+@media (min-width:450px){
+
+    .container__text h1::after {
+        content: '.';
+        color: #946bf9;
+    }
+}
 @media (max-width:450px) {
+
     .cursor {
         display: none;
     }
-
     .cursor--canvas {
         display: none !important;
     }
@@ -362,7 +396,7 @@ div.mouse {
         align-items: center;
         right: 0;
         left: 0;
-        margin-top: 140px;
+        margin-top: 160px;
     }
 
     .header__container {
@@ -376,22 +410,81 @@ div.mouse {
         margin: 45px auto 0 !important;
     }
     .asco-wrap header {
-        margin-bottom: 10.7em;
+        margin-bottom: 12.7em;
     }
     .asco-container__pc__text {
         font-size: 1.3em;
     }
 }
 .asco-container__pc {
-    background: url("../img/ResultComputer.svg") no-repeat center;
+    background: url("../img/resultC.svg") no-repeat center;
     width: 650px;
     height: 400px;
     margin: 0 auto;
     position: relative;
 }
+
 /*           */
 
-/* SCROLL AND SELECT*/
+
+/* CIRCLE */
+.progress-ring__circle {
+    transition: 0.35s stroke-dashoffset;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+.progress-ring {
+    left: 0;
+    right: 0;
+    position: absolute;
+    bottom: 0;
+    top: 4em;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    left: 0.5em;
+    right: 0;
+    zoom: 0.94;
+    margin: auto;
+    z-index: 1;
+}
+.circles {
+    position: absolute;
+    bottom: 0;
+    top: 4em;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    left: 0.5em;
+    right: 0;
+    zoom: 0.94;
+    margin: auto;
+    width: 115px;
+    height: 115px;
+    background-color: white;
+    z-index: 0;
+    border: 11.5px solid rgba(0,0,0, 0.03);
+    border-radius: 100px;
+
+}
+.counterLoad {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 80px;
+}
+/*        */
+
+
+/* SCROLL AND SELECT MOUSE*/
 ::-webkit-scrollbar {
     width: 4px;
 }
@@ -412,6 +505,7 @@ div.mouse {
 /*        */
 
 /* CURSOR */
+
 .cursor--small {
     width: 5px;
     height: 5px;
@@ -445,9 +539,11 @@ div.mouse {
 .cursor--small::after {
     display: none !important;
 }
+
 /*      */
 
 /* LOADING */
+
 .loading-bar {
     z-index: 50;
     position: fixed;
@@ -481,3 +577,178 @@ div.mouse {
 }
 
 /*         */
+
+/* MAIN CONTAINER */
+main {
+    height: 100%;
+}
+.main__title{
+    display:flex;
+    justify-content: space-between;
+}
+.main__combobox{
+    width:100%;
+}
+/*                */
+
+/* SELECT */
+.cs-placeholder {
+    text-align: right;
+    padding-right: 0 !important;
+    color: #946bf9;
+}
+
+.selection__divider {
+    -webkit-transition: height .2s ease-out 0s;
+    transition: height .2s ease-out 0s;
+    background-color: #a5a4a4;
+    height: 3em;
+    width: 0.3px;
+    margin: 1.4em 0;
+    font-family: "Montserrat";
+    font-weight: 100;
+    text-align: center;
+    align-content: center;
+    margin: 0 auto;
+}
+
+/* CS SELECT */
+/* Default custom select styles */
+div.cs-select {
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    text-align: left;
+    background: #fff;
+    z-index: 100;
+    width: 100%;
+    max-width: 200px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    height: 30px;
+    margin: 1.7rem 0 0 0;
+    text-align: right;
+    font-size: 1em;
+    font-family: Montserrat;
+    font-weight: 200;
+    color: #2d2d2d;
+}
+
+    div.cs-select:focus {
+        outline: none; /* For better accessibility add a style for this in your skin */
+    }
+
+.cs-select select {
+    display: none;
+}
+
+.cs-select span {
+    display: block;
+    position: relative;
+    padding: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Placeholder and selected option */
+.cs-select > span {
+    padding-right: 3em;
+}
+
+
+
+
+
+div.cs-active {
+    z-index: 200;
+}
+
+/* Options */
+.cs-select .cs-options {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    background: #fff;
+    visibility: hidden;
+    font-family: Montserrat;
+    font-weight: 200;
+    color: #2d2d2d;
+    overflow: auto;
+    max-height: 200px;
+    paddin-bottom: 0;
+    font-size: 0.8em;
+    text-align: center;
+    width: 200px;
+    align-items: center;
+    margin: 0 0 auto 0;
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+    right: 5px;
+}
+
+
+.cs-select.cs-active .cs-options {
+    visibility: visible;
+}
+.cs-placeholder::after {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-right-style: solid;
+    border-right-width: 1px;
+    content: '';
+    display: inline-block;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    width: 10px;
+    position: relative;
+    transform: rotate(45deg);
+    margin-left: 37px;
+    height: 16px;
+    margin-bottom: 2px;
+}
+.cs-select ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+    margin: 0 0 0 auto;
+    max-height: 200px;
+    background-color:white;
+}
+
+    .cs-select ul span {
+        padding: 1em;
+    }
+
+    .cs-select ul li.cs-focus span {
+        background-color: #ddd;
+    }
+
+/* Optgroup and optgroup label */
+.cs-select li.cs-optgroup ul {
+    padding-left: 1em;
+}
+
+.cs-select li.cs-optgroup > span {
+    cursor: default;
+}
+.cs-options ul li {
+    max-width: 100px;
+}
+.cs-options ul li:hover {
+    color: #946bf9;
+}
+
+@media (max-width: 650px) {
+    div.cs-select {
+        margin: 1rem 0 0 0 !important;
+    }
+}
+    /*        */
