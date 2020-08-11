@@ -164,7 +164,7 @@ h6 {
     font-size: 2.5em;
 }
 
-@media (min-width: 600px){
+@media (min-width: 1000px){
     body {
         overflow-y: hidden;
     }
@@ -642,7 +642,16 @@ div.mouse {
 .main__combobox{
     width:100%;
 }
-
+@media (max-width: 450px)
+{
+    .wrap-card {
+        zoom: 0.8;
+    }
+    .asco-card {
+        margin-bottom: 0 !important;
+        padding: 45px 45px 45px !important;
+    }
+}
 .wrap-card {
     max-width: 1064px;
     margin-left: auto;
@@ -701,7 +710,6 @@ div.mouse {
 }
 .asco-card {
     font-size: 1rem;
-    height: 29.0625em;
     padding: 45px 45px 65px;
     position: relative;
     opacity: 1;
@@ -710,7 +718,6 @@ div.mouse {
 }
 
 .asco-card__emptybox {
-    height: 100%;
     position: relative;
     justify-content: center;
     display: flex;
@@ -918,7 +925,7 @@ div.cs-active {
 
     /* FOOTER */
 footer {
-    padding-bottom: 8.25em;
+    padding-bottom: 6.25em;
     text-align: center;
 }
 .footer__builds-container {
@@ -947,4 +954,26 @@ footer {
         margin-bottom: 3em;
     }
 }
+.footer__socialLink {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    color: #946bf9 !important;
+    font-weight: 600;
+    margin-top: 9em;
+    font-size: 1em !important;
+}
+    .footer__socialLink a {
+        color: #946bf9 !important;
+        transition: 0.4s;
+        text-decoration: none !important;
+        cursor: none !important;
+        width: 50px;
+    }
+
+    .footer__socialLink a:hover {
+        color: #2d2d2d !important;
+        cursor:none !important;
+    }
     /*        */

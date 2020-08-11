@@ -73,7 +73,7 @@
             <div class="wrap-card">
                 @for (int i = 0; i < 9; i++)
                 {
-                    <div class="asco-card">
+                    <div class="asco-card height-fix">
                         <div class="asco-card__emptybox">
                             <div class="asco-card__emptybox__content">
                                 <h4>Graphic<br />card</h4>
@@ -82,6 +82,14 @@
                         </div>
                     </div>
                 }
+                <div class="asco-card">
+                    <div class="asco-card__emptybox">
+                        <div class="asco-card__emptybox__content">
+                            <h4>Graphic<br />card</h4>
+                            <h1>+</h1>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="asco-clear-container">
                 <div class="asco-clear-container__button">Clear All</div>
@@ -90,35 +98,45 @@
         <footer>
             <div class="footer__builds-container">
                 <div class="footer__builds-container__text">Ready builds:</div>
-                <div class="footer__builds-container__button @(Active ? "activeB" : string.Empty)" @onclick="Actives">Budget PC</div>
-                <div class="footer__builds-container__button @(Active2 ? "activeB" : string.Empty)" @onclick="Actvies2">Average PC</div>
-                <div class="footer__builds-container__button @(Active3 ? "activeB" : string.Empty)" @onclick="Actives3">Powerful PC</div>
+                <div class="footer__builds-container__button @(Clicker[0] ? "activeB" : string.Empty)" @onclick="BudgetActive">Budget PC</div>
+                <div class="footer__builds-container__button @(Clicker[1] ? "activeB" : string.Empty)" @onclick="AverageActive">Average PC</div>
+                <div class="footer__builds-container__button @(Clicker[2] ? "activeB" : string.Empty)" @onclick="PowerfulActive">Powerful PC</div>
+            </div>
+            <div class="footer__socialLink">
+                <a href="https://github.com/FectourSu" class="hovA">|</a>
+                <a href="https://github.com/TheWayToJunior" class="hovA">||</a>
             </div>
         </footer>
     </div>
 @code{
-    public bool Active = false;
-    public bool Active2 = false;
-    public bool Active3 = false;
+    public bool[] Clicker = new bool[3];
 
-    void Actives()
+    void BudgetActive()
     {
-        Active = true;
-        Active2 = false;
-        Active3 = false;
+        Clear();
+        Clicker[0] = true;
     }
-    void Actvies2()
+
+    void AverageActive()
     {
-        Active = false;
-        Active2 = true;
-        Active3 = false;
+        Clear();
+        Clicker[1] = true;
     }
-    void Actives3()
+
+    void PowerfulActive()
     {
-        Active = false;
-        Active2 = false;
-        Active3 = true;
+        Clear();
+        Clicker[2] = true;
     }
+
+    void Clear()
+    {
+        for (int i = 0; i < Clicker.Length; i++)
+        {
+            Clicker[i] = false;
+        }
+    }
+
     protected override async Task OnAfterRenderAsync(bool aftR)
     {
         if (aftR)
