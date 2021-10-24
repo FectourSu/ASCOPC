@@ -4,10 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ASCOPC.Infrastructure.Repositories
 {
-    public class RepositoryAsync<TEntity, TKey> : IRepositoryAsync<TEntity, TKey>
-        where TEntity : class, IEntity<TKey>
+    public class RepositoryAsync<TEntity, TKey> : IRepositoryAsync<TEntity>
+        where TEntity : class
     {
         private readonly ApplicationDbContext _dbContext;
+        public RepositoryAsync(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext; 
+        }
         public IQueryable<TEntity> Entities => throw new NotImplementedException();
 
         public async Task<long> CountAsync() => 
@@ -25,26 +29,24 @@ namespace ASCOPC.Infrastructure.Repositories
             return Task.CompletedTask;
         }
 
-        public async Task<List<TEntity>> GetAllAsync()
-        {
-            return await _dbContext
+        public async Task<List<TEntity>> GetAllAsync() =>
+            await _dbContext.Set<TEntity>().ToListAsync();
+
+        public virtual async Task<TEntity> GetByIdAsync(int id) => 
+            await _dbContext.Set<TEntity>().FindAsync(id);
+
+        public async Task<List<TEntity>> GetPagedResponseAsync(int pageNumber, int pageSize) =>
+            await _dbContext
                 .Set<TEntity>()
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .AsNoTracking()
                 .ToListAsync();
-        }
-
-        public Task<TKey> GetByIdAsync(TKey id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<TEntity>> GetPagedResponseAsync(TKey number, TKey pagesize)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task UpdateEntity(TEntity entity)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(entity).CurrentValues.SetValues(entity);
+            return Task.CompletedTask;
         }
     }
 }

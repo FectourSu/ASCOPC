@@ -1,15 +1,15 @@
 ﻿namespace ASCOPC.Domain.Interfaces
 {
-    public interface IRepositoryAsync<TEntity, TKey> 
-        where TEntity : class, IEntity<TKey>
+    public interface IRepositoryAsync<TEntity> 
+        where TEntity : class
     {
         IQueryable<TEntity> Entities { get; }
 
-        Task<TKey> GetByIdAsync(TKey id);
+        Task<TEntity> GetByIdAsync(int id);
 
         Task<List<TEntity>> GetAllAsync();
 
-        Task<List<TEntity>> GetPagedResponseAsync(TKey number, TKey pagesize);
+        Task<List<TEntity>> GetPagedResponseAsync(int number, int pagesize);
 
         Task<TEntity> AddEntity(TEntity entity);
 
