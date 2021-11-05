@@ -1,13 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0-rc.2.21480.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ASCOPC.Domain\ASCOPC.Domain.csproj" />
-    <ProjectReference Include="..\ASCOPC\Shared\ASCOPC.Shared.csproj" />
-    <ProjectReference Include="..\ASOPC.Application\ASOPC.Application.csproj" />
+    <ProjectReference Include="..\Client\ASCOPC.Client.csproj" />
+    <ProjectReference Include="..\Shared\ASCOPC.Shared.csproj" />
   </ItemGroup>
+
 
 </Project>

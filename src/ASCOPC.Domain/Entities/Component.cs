@@ -9,13 +9,13 @@ namespace ASCOPC.Domain.Entities
         public string? UrlImage { get; set; }
         public string? Feture { get; set; }
         public bool InStock { get; set; }
-        public float? Rating { get; set; }
+        public decimal? Rating { get; set; }
         public string? Desciption {  get; set; } 
         public int Code { get; set; }
         public int ManufacturerId { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }
         public int TypeId { get; set; }
         public virtual ComponentType Type{ get; set; }
-        public ICollection<SpecificationComponent> Specifications { get; set; } 
+        public virtual ICollection<SpecificationComponent> SpecificationComponent { get; set; } 
     }
 }

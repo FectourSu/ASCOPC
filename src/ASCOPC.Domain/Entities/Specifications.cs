@@ -6,6 +6,6 @@ namespace ASCOPC.Domain.Entities
     {
         public string SpecificationTitle { get; set; }
         public string SpecificationValue { get; set; }
-        public ICollection<SpecificationComponent> Components { get; set; }
+        public virtual ICollection<SpecificationComponent> SpecificationComponent { get; set; }
     }
 }
