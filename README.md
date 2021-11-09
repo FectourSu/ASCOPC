@@ -3,9 +3,12 @@
 
 <br>
 
- [About](#about) &#09; [Build with](#build-with) &#09; [Disclaimer](#disclaimer)
-&#09; [Settings](#settings)
-&#09; [TODO's](#todos)
+<h3 align="center">
+
+ [About](#about) | [Build with](#build-with) | [Settings](#settings) | [Disclaimer](#disclaimer)
+| [TODO's](#todos)
+
+</h3>
 
 # About
 This project is a computer build service <br>
