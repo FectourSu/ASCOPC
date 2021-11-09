@@ -1,12 +1,16 @@
 <h1  align="left"><p><strong>ASCOPC</strong>
- <img align="right" src="https://lh3.googleusercontent.com/6QQD3nBi-ito8-n_O5ZOuJX4KZxkQNFD7zAxcxE7Nw5fYckf0DBYxZZksIiCnskHgCFDV74WZKm8PySxuXcW9JxDI9G2pxyanF-UPxmusgGT8xoCxtFqtq3nDH23VNpkqgfdGZrAmdUFP4nSxBkAaggoTgMLJyVVs_Zo_t5RxEiSEFxjRGeK-_45nyPap4kW932lWf-7KqWiUnRBU-mct96ddTYjE0mMmxf_45QzcLlc_LTQ9HWk6yTLaIERNFk6bklOQ8e-U-cQfC-3nqHGeeDg2d3EdjsfLGC1S7bD2_RZRyQjbBh9F3sRsiYxv_d6z1bYVOSTljsPNjPDyekwctxV-2Zv_-2ay3vHRPHg-ErMQpFUO4GD_UjAkTuIIlNlkgihTZpwSmZnHO9XvDRCh7e10DgbCxjxfQ2aViLnJa4LCGa8xKrwIktRa40TjzCdDxSk3lUHWjPXvPygWi6YpTRiNi5KoE-1psjFYbBma4rfiqdRdU9v5pPX_tkdt1QVSw41bbEe6A3DZ_Ov4Z8VVHySGuCoO_YtPagGFPDvqRiUVpdBpGN8Dav4dVrSgQMgD7-_LgQHuFo5j58q0Zro1q4xLtSAo1fj7GvcxkcKFHFdT6ijRCnGGnJBcOaTTg-EE8dOB2L5aNbJlROhBsNfVaHMUiazd4_9Tl93OlIDOa1fUQIqlcEPtCYF-ZJgoRbvq6Y0IS8W2QFo_kCv25etkhM=w500-h600-no?authuser=0" width="35" height="40">
+ <img align="right" src="https://lh3.googleusercontent.com/pw/AM-JKLXeR7TQRtQPvfx4s-h7sJSg3GUYt9AkOYCEi2vcZTneC3x7ye_z3wHO_BV2VUggnsCbuz-9yKYOoMQaW6NyX9NC1sgJdvQKbQ3Ojis1SS2rameaymJ64SdqX406-Q6_HkNspHXmOAWetj65POzitEgG=w500-h600-no?authuser=0" width="35" height="40">
 
 <br>
 
 
 # About
 This project is a computer build service <br>
-It is being developed following the example of clean architecture (DDD)
+It is being developed following the example of clean architecture (DDD) <br>
+[Source of inspiration](https://github.com/aspnetcorehero/Boilerplate)
+<br>
+<br>
+
 ## Build with
 
 * ASP.NET Core 6 
@@ -22,5 +26,18 @@ It is being developed following the example of clean architecture (DDD)
 
 # TODOs
 * [x] Repository registration github.com
-* [] Creating entities and migrations
-    * [] Components 
+* [x] Implement all entities
+    * [x] Builds 
+    * [x] User
+    * [x] Role
+    * [x] Manufacturer
+    * [x] Components  
+* [x] Make the first migration
+* [ ] Add a parser for autofill components
+* [ ] Add mapping
+* [ ] Add DTO / Requests & Responses
+* [ ] Add repositories to each entity
+* [ ] Add services to each entity
+* [ ] Implement CQRS
+* [ ] Link the above additions through the MediatR pattern
+* [ ] Add commands to each operation
