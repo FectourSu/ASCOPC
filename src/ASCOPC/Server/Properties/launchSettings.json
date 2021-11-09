@@ -1,6 +1,6 @@
 {
     "profiles": {
-      "Kestral": {
+      "Kernel": {
         "commandName": "Project",
         "dotnetRunMessages": true,
         "launchBrowser": true,

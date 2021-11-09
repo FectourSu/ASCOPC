@@ -1,9 +1,148 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+@inject IJSRuntime js
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<div class="asco-wrap">
+    <BlazorAnimate.Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(2)">
+        <header>
+            <img src="img/logo.svg" class="asco-logo" />
+            <div class="header__container">
+                <BlazorAnimate.Animate Animation="Animations.FadeUp" Duration="TimeSpan.FromSeconds(0.5)">
+                    <div class="container__text">
+                        <h1>ASCOPC<br /><span>Build computer <br /><span class="asco-title__subtitle">your</span> dream</span></h1>
+                    </div>
+                </BlazorAnimate.Animate>
+                <div class="header__container__arrow">
+                     <div class='mouse' @onclick="@(async () => await js.Scroll("BuildId"))">
+                        <span class='scroll-down'></span>
+                    </div>
+                </div>
+            </div>
+            <div class="header__button">RESULT CONFIG</div>
+        </header>
+        <section class="asco-container">
+            <div class="asco-container__pc">
+                <div class="containerPC">
+                    <div id="aSide">
+                    <!-- 3D objsect -->
+                    <model-viewer class="size3d" src="assets/scene.gltf" alt="PC" auto-rotate disable-zoom camera-controls ar ios-src="assets/scene.gltf">
+                    </model-viewer>
+                </div>
+                </div>
+                <div class="asco-container__pc__text t-right-1">MSI Radeon RX 5700 XT</div>
+                <div class="asco-container__pc__text t-right-2">Nvidia Geforce 1050ti</div>
+                <div class="asco-container__pc__text t-right-3">Kingston HyperX Fury Black</div>
+                <div class="asco-container__pc__text t-left-1">Intel LGA1151 v2</div>
+                <div class="asco-container__pc__text t-left-2">Intel B460 Chipset mATX GM</div>
+                <div class="asco-container__pc__text t-left-3">Samsung 970 EVO</div>
+            </div>
+            <div class="asco-container__price">
+                <div class="asco-container__price__money">1200 $</div>
+            </div>
+        </section>
+    </BlazorAnimate.Animate>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <BlazorAnimate.Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(5)">
+        <main @onclick="Current">
+            <div class="main__title">
+                <div class="container__text main__text" id="BuildId">
+                    <h1>Build</h1>
+                </div>
+                <select class="cs-select cs-skin-elastic" name='type' scrolling="yes">
+                    <option value="" disabled selected>All</option>
+                    <option value="All">All</option>
+                    <option value='Motherboard'>Motherboard</option>
+                    <option value='Processor'>Processor</option>
+                    <option value='Graphic card'>Graphic card</option>
+                    <option value='HDD'>HDD</option>
+                    <option value='Culer'>Culer</option>
+                    <option value='RAM'>RAM</option>
+                    <option value='SSD'>SSD</option>
+                </select>
+            </div>
+            <div class="wrap-card">
+                @for (int i = 0; i < 9; i++)
+                {
+                    <div class="asco-card height-fix">
+                        <div class="asco-card__emptybox">
+                            <div class="asco-card__emptybox__content">
+                                <h4>Graphic<br />card</h4>
+                                <h1>+</h1>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="asco-card">
+                    <div class="asco-card__emptybox">
+                        <div class="asco-card__emptybox__content">
+                            <h4>Graphic<br />card</h4>
+                            <h1>+</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="asco-clear-container">
+                <div class="asco-clear-container__button">Clear All</div>
+            </div>
+        </main>
+        </BlazorAnimate.Animate>
+
+        <footer>
+            <div class="footer__builds-container">
+                <div class="footer__builds-container__text">Ready builds:</div>
+                <div class="footer__builds-container__button @(Clicker[0] ? "activeB" : string.Empty)" @onclick="BudgetActive">Budget PC</div>
+                <div class="footer__builds-container__button @(Clicker[1] ? "activeB" : string.Empty)" @onclick="AverageActive">Average PC</div>
+                <div class="footer__builds-container__button @(Clicker[2] ? "activeB" : string.Empty)" @onclick="PowerfulActive">Powerful PC</div>
+            </div>
+            <div class="footer__socialLink">
+                <a href="https://github.com/FectourSu" class="hovA">|</a>
+                <a href="https://github.com/TheWayToJunior" class="hovA">||</a>
+            </div>
+        </footer>
+</div>
+
+@code{
+
+    public bool[] Clicker = new bool[3];
+
+    void Current()
+    {
+        Clear();
+    }
+
+    void BudgetActive()
+    {
+        Clear();
+        Clicker[0] = true;
+    }
+
+    void AverageActive()
+    {
+        Clear();
+
+        Clicker[1] = true;
+    }
+
+    void PowerfulActive()
+    {
+        Clear();
+        Clicker[2] = true;
+    }
+
+    void Clear()
+    {
+        for (int i = 0; i < Clicker.Length; i++)
+        {
+            Clicker[i] = false;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool aftR)
+    {
+        if (aftR)
+        {
+            await js.InvokeVoidAsync("blazorSelectBox");
+        }
+    }
+}

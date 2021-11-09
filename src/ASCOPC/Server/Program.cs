@@ -1,9 +1,17 @@
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.StaticFiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+//Fixed connection .gltf extensions
+var options = new StaticFileOptions
+{
+    ContentTypeProvider = new FileExtensionContentTypeProvider()
+};
+((FileExtensionContentTypeProvider)options.ContentTypeProvider).Mappings.Add(
+    new KeyValuePair<string, string>(".gltf", "text/plain"));
 
+// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
@@ -24,7 +32,7 @@ else
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
+app.UseStaticFiles(options);
 
 app.UseRouting();
 
