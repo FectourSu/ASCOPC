@@ -3,6 +3,9 @@
 
 <br>
 
+ [About](#about) &#09; [Build with](#build-with) &#09; [Disclaimer](#disclaimer)
+&#09; [Settings](#settings)
+&#09; [TODO's](#todos)
 
 # About
 This project is a computer build service <br>
@@ -16,6 +19,11 @@ It is being developed following the example of clean architecture (DDD) <br>
 * ASP.NET Core 6 
 * ASP.NET Core BlazorWebAssebmly 6 
 * ASP.NET Core Restfull-WebAPI 
+<p>
+<br>
+
+# Settings
+docker soon....
 <p>
 <br>
 
