@@ -1,4 +1,5 @@
-﻿using ASCOPC.Infrastructure.Data.Entities;
+﻿using ASCOPC.Domain.Entities;
+using ASCOPC.Infrastructure.Data.Entities;
 using ASCOPC.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,7 @@ namespace ASCOPC.Infrastructure.Data
 
         private static async Task CreateAdminAsync()
         {
-            var powerUser = new User(email: "admin@gmail.com", userName: "admin@gmail.com");
+            var powerUser = new User(email: "admin@gmail.com", userName: "admin");
             string adminPassword = "1488";
 
             var result = await _userManager.CreateAsync(powerUser, adminPassword);
@@ -33,14 +34,14 @@ namespace ASCOPC.Infrastructure.Data
             if (!result.Succeeded)
                 _logger.LogError($"Error: {string.Join("\n", result.Errors.Select(e => e.Description))}");
 
-            await _userManager.AddToRoleAsync(powerUser, adminPassword);
+            await _userManager.AddToRoleAsync(powerUser, "Admin");
             _logger.LogInformation($"Admin created: {powerUser.UserName}");
         }
 
-        private static async Task EntityInitializeAsync(IServiceProvider serviceProvider)
+        public static async Task IdentityInitializeAsync(IServiceProvider serviceProvider)
         {
-            _userManager = serviceProvider.GetService<UserManager<User>>();
-            _roleManager = serviceProvider.GetService<RoleManager<Role>>();
+            _userManager = serviceProvider.GetRequiredService<UserManager<User>>();
+            _roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
             _logger = serviceProvider.GetRequiredService<ILogger<DbInitializer>>();
 
             string[] roleNames = { Roles.Admin, Roles.Moderator, Roles.User };
@@ -54,19 +55,107 @@ namespace ASCOPC.Infrastructure.Data
                     await CreateRoleAsync(roleName);
             }
 
-            var user = await _userManager.FindByEmailAsync("adming@gmail.com");
-            _logger.LogInformation("Checking account registration");
+            var user = await _userManager.FindByEmailAsync("admin@gmail.com");
+            _logger.LogInformation("Checking administrator account registration");
 
             if (user == null)
                 await CreateAdminAsync();
         }
 
-        public void Initialize(ModelBuilder builder)
+        public static void Initialize(ModelBuilder builder)
         { 
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
 
-            
+            builder.Entity<Manufacturer>().HasData(
+              new Manufacturer[]
+              {
+                    new Manufacturer
+                    {
+                        Id = 1,
+                        CreateAt = DateTime.Now,
+                        Name = "AMD"
+                    },
+                    new Manufacturer
+                    {
+                        Id = 2,
+                        CreateAt= DateTime.Now,
+                        Name = "Intel"
+                    }
+              });
+
+            builder.Entity<Specifications>().HasData(
+              new Specifications[]
+              {
+                    new Specifications
+                    {
+                        Id = 1,
+                        CreateAt = DateTime.Now,
+                        SpecificationTitle =
+                        "Гарантия " +
+                        "Страна-производитель " +
+                        "Модель " +
+                        "Код производителя " +
+                        "Год релиза " +
+                        "Сокет " +
+                        "Система охлаждения в комплекте " +
+                        "Термоинтерфейс в комплекте",
+                        SpecificationValue =
+                        "12 мес. " +
+                        "Китай " +
+                        "AMD Ryzen 5 3600 " +
+                        "100-000000031" +
+                        "2019" +
+                        "AM4" +
+                        "нет" +
+                        "нет"
+                    }
+              });
+
+            builder.Entity<ComponentType>().HasData(
+              new ComponentType[]
+              {
+                    new ComponentType
+                    {
+                        Id = 1,
+                        CreateAt = DateTime.Now,
+                        Name = "Процессор"
+                    }
+              });
+
+            builder.Entity<Component>().HasData(
+              new Component[]
+              {
+                    new Component
+                    {
+                        Id = 1,
+                        CreateAt = DateTime.Now,
+                        Name = "AM4, 6 x 3600 МГц, L2 - 3 МБ, L3 - 32 МБ, 2хDDR4-3200 МГц, TDP 65 Вт",
+                        UrlImage = "https://c.dns-shop.ru/thumb/st4/fit/500/500/6e55c08c071d9744dba9a9582eafd812/fc1ee4a47dc4a1740799e996bf0d478f8908764c5f55f176f6b0bc0ca5f5eef2.jpg.webp",
+                        Desciption = "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует" +
+                        " высоким уровнем производительности подавляющее большинство пользователей. " +
+                        "Устройство будет уверенно себя чувствовать в составе мощной игровой системы. " +
+                        "Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. " +
+                        "Важной особенностью процессора является очень большой объем кэша третьего уровня: величина этого показателя равна 32 МБ. " +
+                        "Объем кэша L2 – 3 МБ.",
+                        InStock = true,
+                        Rating = 4.5m,
+                        Code = 1372637,
+                        Price = 17.699m,
+                        ManufacturerId = 1,
+                        TypeId = 1
+                    }
+              });
+
+            builder.Entity<SpecificationComponent>().HasData(
+              new SpecificationComponent[]
+              {
+                    new SpecificationComponent
+                    {
+                        SpecificationId = 1,
+                        ComponentId = 1
+                    }
+              });
         }
     }
 }

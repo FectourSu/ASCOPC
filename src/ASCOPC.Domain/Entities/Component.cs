@@ -7,7 +7,6 @@ namespace ASCOPC.Domain.Entities
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string? UrlImage { get; set; }
-        public string? Feture { get; set; }
         public bool InStock { get; set; }
         public decimal? Rating { get; set; }
         public string? Desciption {  get; set; } 

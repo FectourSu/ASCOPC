@@ -31,7 +31,7 @@ namespace ASCOPC.Infrastructure.Data
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
 
-            //DbInitializer.Initialize(builder);
+            DbInitializer.Initialize(builder);
         }
     }
 }

@@ -23,8 +23,8 @@ namespace ASCOPC.Infrastructure.Data.Configurations
                 .HasColumnType("decimal")
                 .IsRequired();
 
-            builder.HasMany(b => b.UserBuilds)
-                .WithOne(u => u.Builds)
+            builder.HasOne(u => u.User)
+                .WithMany(u => u.Builds)
                 .IsRequired();
         }
     }

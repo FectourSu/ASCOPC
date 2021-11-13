@@ -1,4 +1,4 @@
-﻿namespace ASCOPC.Infrastructure.Data.Entities
+﻿namespace ASCOPC.Infrastructure.Data.Enums
 {
     public enum Category
     {
