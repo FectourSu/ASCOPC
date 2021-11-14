@@ -40,13 +40,18 @@ docker soon....
     * [x] User
     * [x] Role
     * [x] Manufacturer
-    * [x] Components  
+    * [x] Components
+* [x] Add Repository to each entities
 * [x] Make the first migration
-* [ ] Add a parser for autofill components
-* [ ] Add mapping
+* [x] Add Services to each entities
+* [x] Add [Citilink](https://www.citilink.ru/) parser for autofill components
+* [x] Add FillProvider to manage fill grab components couple with entities
+* [x] Add UnitOfWork
+* [x] Add custom DependencyInjection
+* [x] Add DbInitialer
+* [x] Add DbTransaction to manage transactions
+* [ ] Deploy the application on the docker
 * [ ] Add DTO / Requests & Responses
-* [ ] Add repositories to each entity
-* [ ] Add services to each entity
-* [ ] Implement CQRS
+* [ ] Add Commands and AutoMapper
 * [ ] Link the above additions through the MediatR pattern
 * [ ] Add commands to each operation

@@ -27,7 +27,7 @@ namespace ASCOPC.Infrastructure.Data
         private static async Task CreateAdminAsync()
         {
             var powerUser = new User(email: "admin@gmail.com", userName: "admin");
-            string adminPassword = "1488";
+            string adminPassword = "FectourSu1488";
 
             var result = await _userManager.CreateAsync(powerUser, adminPassword);
 
@@ -143,7 +143,7 @@ namespace ASCOPC.Infrastructure.Data
                         Code = 1372637,
                         Price = 17.699m,
                         ManufacturerId = 1,
-                        TypeId = 1
+                        TypeId = 1,
                     }
               });
 

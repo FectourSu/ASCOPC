@@ -1,4 +1,5 @@
 using ASCOPC.Infrastructure.Data;
+using ASCOPC.Infrastructure.Extensions;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,9 @@ var options = new StaticFileOptions
 ((FileExtensionContentTypeProvider)options.ContentTypeProvider).Mappings.Add(
     new KeyValuePair<string, string>(".gltf", "text/plain"));
 
+// connection custom DI extension
+builder.Services.AddInfrastructure(builder.Configuration);
+
 // auth
 builder.Services.AddMvcCore()
     .AddAuthorization();
@@ -20,13 +24,10 @@ builder.Services.AddMvcCore()
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
 
 var app = builder.Build();
 
+// initialize roles
 using var scope = app.Services.CreateScope();
 var provider = scope.ServiceProvider;
 var logger = provider.GetRequiredService<ILogger<Program>>();
@@ -37,8 +38,6 @@ try
 
     logger.LogInformation("Finished Seeding Default Data");
     logger.LogInformation("Application Starting");
-
-    await app.RunAsync();
 }
 catch (Exception ex)
 {

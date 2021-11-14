@@ -11,6 +11,7 @@ namespace ASCOPC.Infrastructure.Data.Entities
         public Category Categories { get; set; }
         public decimal Price { get; set; }
         public virtual User User { get; set; }
+        public string UserId { get; set; }
         public virtual ICollection<Component> Components { get; set; }
     }
 }

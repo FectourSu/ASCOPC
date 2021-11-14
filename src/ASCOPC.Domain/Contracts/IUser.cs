@@ -1,6 +1,4 @@
-﻿using ASCOPC.Domain.Common;
-
-namespace ASCOPC.Domain.Interfaces
+﻿namespace ASCOPC.Domain.Contracts
 {
     public interface IUser
     {
