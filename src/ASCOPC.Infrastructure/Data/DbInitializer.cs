@@ -63,7 +63,7 @@ namespace ASCOPC.Infrastructure.Data
         }
 
         public static void Initialize(ModelBuilder builder)
-        { 
+        {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
 

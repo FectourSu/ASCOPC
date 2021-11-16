@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="DTO\ComponentsDTO.cs~RF61aa80.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\ASCOPC.Domain\ASCOPC.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Requests\" />
   </ItemGroup>
 </Project>

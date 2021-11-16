@@ -1,6 +1,6 @@
 ﻿namespace ASCOPC.Domain.Interfaces
 {
-    public interface IRepositoryAsync<TEntity> 
+    public interface IRepositoryAsync<TEntity>
         where TEntity : class
     {
         IQueryable<TEntity> Entities { get; }

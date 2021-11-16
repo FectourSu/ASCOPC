@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="0.16.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ASCOPC.Domain\ASCOPC.Domain.csproj" />
   </ItemGroup>
 

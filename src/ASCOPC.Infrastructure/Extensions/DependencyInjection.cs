@@ -1,5 +1,6 @@
 ﻿using ASCOPC.Infrastructure.Data;
 using ASCOPC.Infrastructure.Data.Entities;
+using ASCOPC.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,9 +10,10 @@ namespace ASCOPC.Infrastructure.Extensions
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection  AddInfrastructure(this IServiceCollection collection, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection collection, IConfiguration configuration)
         {
-            
+
+            collection.AddTransient<ParserService>();
 
             collection.AddDbContext<ApplicationDbContext>(options =>
              {

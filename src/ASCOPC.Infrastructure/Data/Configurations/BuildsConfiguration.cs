@@ -1,5 +1,4 @@
-﻿using ASCOPC.Domain.Entities;
-using ASCOPC.Infrastructure.Data.Entities;
+﻿using ASCOPC.Infrastructure.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

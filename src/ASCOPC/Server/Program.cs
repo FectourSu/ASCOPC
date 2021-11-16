@@ -1,7 +1,6 @@
 using ASCOPC.Infrastructure.Data;
 using ASCOPC.Infrastructure.Extensions;
 using Microsoft.AspNetCore.StaticFiles;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
