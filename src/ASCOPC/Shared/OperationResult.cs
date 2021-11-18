@@ -15,7 +15,7 @@ namespace ASCOPC.Shared
             return this;
         }
 
-        public static OperationResultBuilder CreateBuilder() => new();
+        public static new OperationResultBuilder CreateBuilder() => new();
     }
     public class OperationResultBuilder
     {

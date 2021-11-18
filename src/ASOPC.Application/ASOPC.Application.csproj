@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ASCOPC.Domain\ASCOPC.Domain.csproj" />
+    <ProjectReference Include="..\ASCOPC\Shared\ASCOPC.Shared.csproj" />
   </ItemGroup>
 
 </Project>

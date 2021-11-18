@@ -1,7 +1,6 @@
-﻿using ASCOPC.Infrastructure.Parser.Citilink;
-using ASCOPC.Infrastructure.Services;
-using ASCOPC.Shared;
+﻿using ASCOPC.Domain.Contracts;
 using ASCOPC.Shared.DTO;
+using ASOPC.Application.Interfaces.Providers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASCOPC.Server.Controllers
@@ -10,19 +9,16 @@ namespace ASCOPC.Server.Controllers
     [ApiController]
     public class FillComponentsController : ControllerBase
     {
-        
-        private readonly ParserService _parser;
-        public FillComponentsController(ParserService parser)
-        {
-            _parser = parser; 
-        }
-        [HttpPost]
-        public async Task<ActionResult<OperationResult<ComponentsDTO>>> FillComponentItem()
-        {
-            var type = "product/materinskaya-plata-asrock-a320m-dvs-r4-0-socketam4-amd-a320-matx-ret-1120710/";
-            _parser.ParseItem(new CitilinkParserSetting(type), type); 
 
-            return Ok();
+        private readonly IFillComponentProvider _provider;
+
+        public FillComponentsController(IFillComponentProvider provider)
+        {
+            _provider = provider ?? throw new ArgumentNullException(nameof(provider));
         }
+
+        [HttpPost]
+        public async Task<ActionResult<IResult<ComponentsDTO>>> FillComponentItem([FromQuery] string url) =>
+            Ok(await _provider.FillComponentItem(url));
     }
 }

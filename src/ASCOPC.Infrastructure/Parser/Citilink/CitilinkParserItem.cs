@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Html.Dom;
 using ASCOPC.Shared.DTO;
 using ASOPC.Application.Interfaces.Parser;
+using System;
 using System.Text.RegularExpressions;
 
 namespace ASCOPC.Infrastructure.Parser.Citilink
@@ -11,25 +12,63 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
         {
             var item = new ComponentsDTO();
 
-            //var price = ParseTextContent(document, "div.price ins.num");
-            //item.Price = decimal.Parse(price);
+            var name = ParseTextContent(document,
+                "div.ProductCardLayout__product-description div h1").Trim();
+            item.Name = Regex.Replace(name, @"[а-яА-ЯёЁ]", "").TrimStart();
 
-            //var name = ParseAttribute(document, "div.product_details div.not_display span[itemprop=name]", "content");
-            //item.Name = Regex.Replace(name, @"[А-я]+\S+\s", string.Empty);
+            var code = ParseTextContent(document,
+                "div.ProductCardLayout__product-description " +
+                "div div.ProductHeader__info div.ProductHeader__product-id").Trim();
+            item.Code = int.Parse(Regex.Replace(code, @"[[а-яА-ЯёЁ:\s]", ""));
 
-            //item.Manufacturer = ParseAttribute(document, "div.product_details div.not_display span[itemprop=brand]", "content");
-            //item.Desciption = ParseAttribute(document, "div.product_details div.not_display span[itemprop=description]", "content");
+            item.Manufacturer = ParseTextContent(document, 
+                "div.ProductCardLayout__breadcrumbs div div div:nth-child(4) a span").Trim();
+
+            item.Desciption = ParseTextContent(document,
+                "div.AboutTab__description-text p:nth-child(1)");
+
+            var rating = ParseTextContent(document,
+                "span.IconWithCount__count").Trim();
+            item.Rating = decimal.Parse(rating);
+
+            item.Price = 0;
+            item.InStock = false;
+            var inStock = ParseTextContent(document,
+                "h2.ProductHeader__not-available-header");
+
+            if (String.IsNullOrWhiteSpace(inStock))
+            {
+                item.InStock = true;
+                item.Price = decimal.Parse(ParseTextContent(document,
+                    "span.ProductHeader__price-default_current-price"));
+            }
+
+            item.UrlImage = ParseAttribute(document,
+                "#item-1 img", "src");
+
+            item.Type = ParseTextContent(document,
+                "div.ProductCardLayout__breadcrumbs div div div:nth-child(3) a span").Trim();
 
             item.Specification = ParseProperties(document);
 
             return item;
         }
-
+        
         public string ParseAttribute(IHtmlDocument document, string selector, string attribure) =>
             document.QuerySelector(selector).GetAttribute(attribure);
 
-        public string ParseTextContent(IHtmlDocument document, string selector) =>
-            document.QuerySelector(selector).TextContent;
+        public string ParseTextContent(IHtmlDocument document, string selector)
+        {
+            try
+            {
+                return document.QuerySelector(selector).TextContent;
+            }
+            catch
+            {
+                return string.Empty; 
+            }
+        }
+
 
         public SpecificationsDTO[] ParseProperties(IHtmlDocument document)
         {
@@ -37,17 +76,16 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
 
             var elements = document.QuerySelector("div.Specifications").Children;
 
-            var str = new (string replace, string replacement)[]
-                {
-                    //("Maximum amount of memory", "Maximum amount of RAM")
-                };
-
             foreach (var div in elements)
             {
                 result.Add(new SpecificationsDTO
                 {
-                    SpecificationTitle = div.QuerySelector("div.Specifications__column_name").TextContent,
-                    SpecificationValue = div.QuerySelector("div.Specifications__column_value").TextContent
+                    SpecificationTitle = div.QuerySelector("div.Specifications__column_name")
+                    .TextContent
+                    .Trim(),
+                    SpecificationValue = div.QuerySelector("div.Specifications__column_value")
+                    .TextContent
+                    .Trim()
                 });
             }
 

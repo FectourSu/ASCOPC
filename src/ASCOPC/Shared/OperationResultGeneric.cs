@@ -8,6 +8,7 @@ namespace ASCOPC.Shared
         public OperationResult(T value = null)
         {
             Value = value;
+            CreateBuilder();
         }
         public T Value { get; private set; }
 
