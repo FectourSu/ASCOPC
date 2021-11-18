@@ -11,7 +11,10 @@
 # About
 This project is a computer build service <br>
 It is being developed following the example of clean architecture (DDD) <br>
-[Source of inspiration](https://github.com/aspnetcorehero/Boilerplate)
+### Source of inspiration
+[Biolerplate](https://github.com/aspnetcorehero/Boilerplate)
+[Ember](https://github.com/TheWayToJunior/Ember-Refactoring)
+
 <br>
 <br>
 
@@ -48,7 +51,7 @@ docker soon....
 * [x] Add FillProvider to manage fill grab components couple with entities
 * [x] Add UnitOfWork
 * [x] Add custom DependencyInjection
-* [x] Add DbInitialer
+* [x] Add DbInitializer
 * [x] Add DbTransaction to manage transactions
 * [ ] Deploy the application on the docker
 * [ ] Add DTO / Requests & Responses
