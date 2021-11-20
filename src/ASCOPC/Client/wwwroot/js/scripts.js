@@ -9,6 +9,3 @@ window.blazorScrollToElementId = (elementId) => {
     element.scrollIntoView({ block: "start", behavior: "smooth" });
     return true;
 }
-
-
-

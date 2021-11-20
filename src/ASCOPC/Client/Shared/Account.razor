@@ -1,0 +1,21 @@
+﻿<div class="header__content">
+    <img src="img/logo.svg" class="asco-logo" />
+    <div class="account__container @(IsActive ? "is-active" : "")" @onclick="@Toggle">
+        <div class="circle @(IsActive ? "circle_active" : "")">
+        <span class="account__name">Hi, <span style="font-weight:600">username</span>!</span>
+        <span class="lnr lnr__user lnr-user"></span></div>
+        <ul>
+            <li><a href="#">Builds</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+</div>
+
+@code{
+    private bool IsActive { get; set; } = false;
+
+    private void Toggle()
+    {
+        IsActive = !IsActive;
+    }
+}

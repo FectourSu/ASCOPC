@@ -27,9 +27,12 @@ namespace ASCOPC.Infrastructure.Parser
             var options = new ChromeOptions();
 
             options.AddArgument("headless");
-
+            
             IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory(), options);
             driver.Navigate().GoToUrl(this.Uri);
+
+           
+
             return driver.PageSource;
         }
 

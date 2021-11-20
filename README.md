@@ -54,7 +54,7 @@ docker soon....
 * [x] Add DbInitializer
 * [x] Add DbTransaction to manage transactions
 * [ ] Deploy the application on the docker
-* [ ] Add DTO / Requests & Responses
-* [ ] Add Commands and AutoMapper
-* [ ] Link the above additions through the MediatR pattern
+* [x] Add DTO / Requests & Responses
+* [x] Add Commands and AutoMapper
+* [x] Link the above additions through the MediatR pattern
 * [ ] Add commands to each operation

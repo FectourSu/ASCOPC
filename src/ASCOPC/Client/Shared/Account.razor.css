@@ -1,0 +1,96 @@
+﻿.header__content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.account__container {
+    align-items: center;
+    display: flex;
+}
+
+.circle {
+    width: auto;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    padding: 17px;
+}
+
+.circle_active {
+    box-shadow: 0 5px 54px rgb(170 130 400 / 25%);
+}
+
+.lnr__user {
+    color: #946bf9;
+}
+
+.account__name {
+    font-size: 12px;
+    padding-right: 22px;
+}
+
+.account__container ul {
+    height: fit-content;
+    border: 1px solid lightgray;
+    position: absolute;
+    height: fit-content;
+    width: 134px;
+    right: -5px;
+    border-radius: 10px;
+    top: 137px;
+    opacity: 0;
+    transform: translatey(10px);
+    transition: all 0.4s ease;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    width: fit-content;
+}
+
+    .account__container ul li a {
+        color: #a5a4a4;
+        font-family: Montserrat;
+        cursor: none;
+        width: 60px;
+        text-align: left;
+    }
+
+        .account__container ul li a:hover {
+            color: #2d2d2d;
+        }
+
+    .account__container ul li {
+        list-style: none;
+        padding: 10px 18px;
+        display: flex;
+        align-items: center;
+        font-size: 0.7em;
+        width: 100%;
+        height: 100%;
+        white-space: nowrap;
+        transition: 0.3s;
+    }
+
+        .account__container ul li + li {
+            border-top: 1px solid lightgray;
+        }
+
+.is-active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.account__container.is-active ul {
+    opacity: 1;
+    transform: translatey(25px);
+    height: fit-content;
+    border: 1px solid lightgray;
+    z-index: 300;
+    background-color: white;
+}

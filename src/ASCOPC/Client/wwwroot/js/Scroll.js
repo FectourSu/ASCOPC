@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿window.blazorScroll = () => {
     /*------------------------------
     SupahScroll
     ------------------------------*/
@@ -8,10 +8,10 @@
     Initialize
     ------------------------------*/
     const supahscroll = new SupahScroll({
-        el: 'div',
+        el: '.asco-wrap',
         speed: 0.1
     });
-});
+};
 
 class SupahScroll {
     constructor(options) {

@@ -1,0 +1,21 @@
+﻿@using ASCOPC.Client.Shared.Modals
+@inject IModalService Modal;
+<div class="header__nav">
+    <div class="button__nav" @onclick="@(async () => await ShowModalAsync())"><span class="lnr lnr__buttons lnr-enter"></span></div>
+    <div class="button__nav"><span class="lnr lnr__buttons lnr-download"></span></div>
+    <div class="button__nav"><span class="lnr lnr__buttons lnr-envelope"></span></div>
+    <div class="button__nav"><span class="lnr lnr__buttons lnr-cart"></span></div>
+</div>
+
+@code{
+    public async Task ShowModalAsync()
+    {
+        var options = new ModalOptions()
+        {
+            Animation = ModalAnimation.FadeIn(0.18)
+        };
+
+        var formModal = Modal.Show<Login>("",options);
+        var result = await formModal.Result;
+     }
+}

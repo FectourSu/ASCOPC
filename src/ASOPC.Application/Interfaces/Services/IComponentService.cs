@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ASCOPC.Domain.Contracts;
+using ASCOPC.Shared.DTO;
 
 namespace ASOPC.Application.Interfaces.Services
 {
     public interface IComponentService
     {
-        
+        //Task MapProperty(HardwareItemEntity entity, IEnumerable<CompatibilityPropertyRequest> properties);
     }
 }

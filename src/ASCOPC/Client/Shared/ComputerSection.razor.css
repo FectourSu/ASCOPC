@@ -1,0 +1,52 @@
+﻿
+.asco-container {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+}
+
+.asco-container__pc__text {
+    position: absolute;
+    height: 80px;
+    width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9em;
+    text-align: center;
+    font-family: "Montserrat";
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 1px;
+    font-weight: 500;
+}
+
+@media(max-width:450px)
+{
+    .asco-container__pc__text{font-size: 1.4em}
+}
+
+.asco-container__pc {
+    background: url("../img/Computer.png") no-repeat center;
+    background-size: contain;
+    width: 650px;
+    height: 400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.containerPC {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    position: relative;
+    height: 450px;
+    width: 400px;
+}
+
+.size3d {
+    height: 400px;
+    width: 400px;
+    overflow: hidden;
+}

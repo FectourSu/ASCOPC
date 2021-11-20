@@ -1,0 +1,33 @@
+﻿<div class="simple-form">
+      <div class="overlay__inner">
+        <h1 class="overlay__title">
+          <span class="sign__logo lnr lnr-users"></span>
+          <span class="sing__title">Sign up with email</span>
+        </h1>
+        <div class="align">
+          <div class="grid">
+            <form class="form login">
+              <div class="form__field">
+                <label for="login__username">
+                <span class="lnr lnr-user"></span>
+                <span class="hidden">Username</span></label>
+                <input autocomplete="username" id="login__username" type="email" name="username" class="form__input" placeholder="Email" required>
+              </div>
+              <div class="form__field">
+                <label for="login__password">
+                <span class="lnr lnr-lock"></span>
+                <span class="hidden">Password</span></label>
+                <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
+              </div>
+              <div class="form__field">
+                <button class="sign__button">SIGN IN</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+
+@code{
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+}

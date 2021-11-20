@@ -1,15 +1,16 @@
-﻿using ASCOPC.Domain.Common;
+﻿using ASCOPC.Domain.Contracts;
 using ASCOPC.Domain.Entities;
 using ASCOPC.Infrastructure.Data.Enums;
+using MediatR;
 
-namespace ASCOPC.Infrastructure.Data.Entities
+namespace ASOPC.Application.Features.Builds.Commands.Delete
 {
-    public class Builds : EntityBase
+    public class DeleteBuildCommand : IRequest<IResult>
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public Category Categories { get; set; }
-        public virtual User User { get; set; }
-        public string UserId { get; set; }
+        public decimal Price { get; set; }
         public virtual ICollection<Component> Components { get; set; }
     }
 }

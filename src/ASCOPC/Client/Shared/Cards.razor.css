@@ -1,0 +1,127 @@
+﻿
+@media (max-width: 450px) {
+    .wrap-card {
+        zoom: 0.8;
+    }
+
+    .asco-card {
+        margin-bottom: 0 !important;
+        padding: 45px 45px 45px !important;
+    }
+}
+
+.wrap-card {
+    max-width: 1064px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+@media (min-width: 900px) {
+    .asco-card:nth-child(3n+1) {
+        margin-right: -100%;
+        clear: both;
+        margin-left: 0;
+    }
+
+    .asco-card:nth-child(3n+2) {
+        margin-left: 34.42029%;
+        margin-right: -100%;
+        clear: none;
+    }
+
+    .asco-card:nth-child(3n+3) {
+        margin-left: 68.84058%;
+        margin-right: -100%;
+        clear: none;
+    }
+
+    .asco-card {
+        width: 31.15942%;
+        float: left;
+        margin-bottom: 3.26087%;
+    }
+}
+
+@media (max-width: 900px) and (min-width: 550px) {
+    .asco-card:nth-child(2n+1) {
+        margin-right: -100%;
+        clear: both;
+        margin-left: 0;
+    }
+
+    .asco-card:nth-child(2n+2) {
+        margin-left: 53.14685%;
+        margin-right: -100%;
+        clear: none;
+    }
+
+    .asco-card {
+        width: 46.85315%;
+        float: left;
+        margin-bottom: 6.29371%;
+    }
+}
+
+@media (max-width: 550px) {
+    .asco-card {
+        width: 100%;
+        float: left;
+        margin-right: 0;
+        margin-bottom: 13.43284%;
+    }
+}
+
+.asco-card {
+    font-size: 1rem;
+    padding: 45px 45px 65px;
+    position: relative;
+    opacity: 1;
+    -webkit-transition: opacity 1s ease-in 0s;
+    transition: opacity 1s ease-in 0s;
+}
+
+.asco-card__emptybox {
+    position: relative;
+    justify-content: center;
+    display: flex;
+}
+
+.asco-card__emptybox__content {
+    text-align: center;
+    align-items: center;
+    margin: 0 auto;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    user-select: none;
+}
+
+    .asco-card__emptybox__content h4 {
+        color: #a5a4a4;
+        font-weight: 100;
+        font-size: 1.3em;
+        letter-spacing: .2em;
+        line-height: 1.6em;
+        font-family: "Montserrat";
+        text-align: left;
+        margin: 0 0 0.5em 0;
+        width: 100%;
+    }
+
+        .asco-card__emptybox__content h4::before {
+            content: '.';
+            color: #946bf9;
+            font-size: 3em;
+            display: block;
+            margin-bottom: 0.15em;
+        }
+
+    .asco-card__emptybox__content h1 {
+        color: #a5a4a4;
+        font-size: 3.7em;
+        font-weight: 100;
+    }

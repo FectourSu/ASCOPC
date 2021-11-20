@@ -1,0 +1,40 @@
+﻿<div class="footer__builds-container">
+    <div class="footer__builds-container__text">Builds:</div>
+    @foreach(var build in builds)
+    {
+        <div class="footer__builds-container__button @(build.Active ? "activeBuilds" : null)" 
+            @onclick="async () => await SelectBuild(build)">@build.Name</div>
+    }
+</div>
+
+@code{
+    [Parameter]
+    public EventCallback<object> SelectedLink { get; set; }
+
+    private List<TypeBuilds> builds = new()
+    {
+        new TypeBuilds("CustomPC") { Active = true },
+        new TypeBuilds("ExpensivePC"),
+        new TypeBuilds("MediumPC"),
+        new TypeBuilds("LowPC")
+    };
+
+    class TypeBuilds
+    {
+        public TypeBuilds(string name)
+        {
+            Name = name;
+        }
+
+        public string Name{ get; set; }
+        public bool Active { get; set; } = false;
+    }
+
+    private async Task SelectBuild(TypeBuilds link)
+    {
+        foreach (var b in builds)
+            b.Active = false;
+
+        await SelectedLink.InvokeAsync(link.Active = true);
+    }
+}

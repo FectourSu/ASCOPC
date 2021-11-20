@@ -1,0 +1,27 @@
+﻿.feedback, .feedback a {
+    color: rgb(148, 107, 249);
+}
+
+.feedback {
+    z-index: 222;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 110px;
+    text-transform: uppercase;
+    border: 0.1px solid rgb(148, 107, 249);
+    padding: 2em;
+    font-size: 0.7em;
+    letter-spacing: 0.3em;
+    line-height: 1.6em;
+    font-family: Montserrat;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: all 0.4s ease 0s;
+    user-select: none;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    cursor: none;
+    background-color: white;
+}

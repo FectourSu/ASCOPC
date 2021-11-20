@@ -1,0 +1,50 @@
+﻿.header__nav {
+    width: 100%;
+    display: flex;
+}
+
+.header__nav {
+    width: 100%;
+    display: flex;
+}
+.button__nav {
+    width: 53px;
+    height: 56px;
+    margin-top: 40px;
+    border-radius: 5px;
+    -webkit-transition: 0.4s;
+    border: 0.1px solid lightgray;
+    margin-right: 1.5rem;
+}
+
+    .button__nav:hover {
+        background-color: #946bf9;
+        box-shadow: #946bf9;
+        border: none !important;
+        box-shadow: 0 4px 44px rgb(170 130 400 / 35%);
+        transition-property: background, color, buttom, opacity, visibility;
+        -webkit-transition: 0.4s;
+    }
+
+        .button__nav:hover .lnr__buttons {
+            color: white;
+            -webkit-transition: 0.4s;
+        }
+
+    .button__nav:nth-last-child(-n+1) {
+        margin-right: 0 !important;
+    }
+
+.lnr__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: inherit;
+    color: lightgray;
+    font-size: 20px !important;
+}
+
+
+.lnr-envelope, .lnr-download {
+    padding: 0px 0px 3px 1px
+}

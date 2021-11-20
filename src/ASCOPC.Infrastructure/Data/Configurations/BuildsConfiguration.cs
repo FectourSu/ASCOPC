@@ -12,14 +12,10 @@ namespace ASCOPC.Infrastructure.Data.Configurations
                 .HasKey(i => i.Id);
 
             builder.Property(n => n.Name)
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsRequired();
 
             builder.Property(c => c.Categories)
-                .IsRequired();
-
-            builder.Property(p => p.Price)
-                .HasColumnType("decimal")
                 .IsRequired();
 
             builder.HasOne(u => u.User)
