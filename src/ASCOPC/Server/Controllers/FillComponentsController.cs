@@ -42,8 +42,8 @@ namespace ASCOPC.Server.Controllers
             };
             foreach (var link in links)
             {
-                HtmlLoader client = new(link);
-                await client.GetSource();
+                CitilinkBucketService client = new();
+                await client.Add(link);
             }
             return Ok();
         }

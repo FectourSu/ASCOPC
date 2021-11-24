@@ -2,7 +2,11 @@
 
 namespace ASCOPC.Infrastructure.Extensions
 {
-    public class HtmlLoaderExtension
+    /// <summary>
+    /// This class provides methods for working with the keyboard, 
+    /// which in the final operations should give us the closure of the tab when sending an item to orders.
+    /// </summary>
+    public class CitilinkBucketExtension
     {
         [DllImportAttribute("user32.dll", EntryPoint = "SetForegroundWindow")]
         [return: MarshalAsAttribute(UnmanagedType.Bool)]

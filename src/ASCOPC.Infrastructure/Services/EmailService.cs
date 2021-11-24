@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ASCOPC.Infrastructure.Services
 {
-    internal class EmailService //: IEmailService
+    internal class EmailService : IEmailService
     {
     }
 }
