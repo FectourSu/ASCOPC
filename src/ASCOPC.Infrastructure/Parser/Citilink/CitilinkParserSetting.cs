@@ -14,12 +14,8 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
             Navigate = nav;
             BaseUrl = "https://www.citilink.ru";
         }
-
         public string Url => $"{BaseUrl}/{Navigate}";
         public string Navigate { get; private set; }
-        public string Prefix { get; private set; }
         public string BaseUrl { get; private set; }
-        public int StartPoint { get; set; }
-        public int EndPoint { get; set; }
     }
 }

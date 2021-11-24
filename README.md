@@ -58,3 +58,4 @@ docker soon....
 * [x] Add Commands and AutoMapper
 * [x] Link the above additions through the MediatR pattern
 * [ ] Add commands to each operation
+* [x] Implement the possibility of adding to the cart citilink.ru items

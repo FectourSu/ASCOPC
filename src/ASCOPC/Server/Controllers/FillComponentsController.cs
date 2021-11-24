@@ -1,8 +1,4 @@
-﻿using ASCOPC.Domain.Contracts;
-using ASCOPC.Infrastructure.Parser;
-using ASCOPC.Infrastructure.Services;
-using ASCOPC.Shared.DTO;
-using ASOPC.Application.Interfaces.Providers;
+﻿using ASCOPC.Infrastructure.Services;
 using ASOPC.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,20 +28,17 @@ namespace ASCOPC.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<string>> FillComponentItem()
+        public async Task<ActionResult<Domain.Contracts.IResult>> FillComponentItem()
         {
-            List<string> links = new() 
+            ///todo incapsulate
+            List<int> links = new()
             {
-                "https://www.citilink.ru/basket/add/product/1469012",
-                "https://www.citilink.ru/basket/add/product/1105049",
-                "https://www.citilink.ru/basket/add/product/1078120"
+                1469012,
+                1105049,
+                1078120
             };
-            foreach (var link in links)
-            {
-                CitilinkBucketService client = new();
-                await client.Add(link);
-            }
-            return Ok();
+            CitilinkBucketService client = new();
+            return Ok(await client.Add(links));
         }
     }
 }

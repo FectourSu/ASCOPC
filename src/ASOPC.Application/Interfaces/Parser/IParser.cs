@@ -12,9 +12,6 @@ namespace ASOPC.Application.Interfaces.Parser
     {
         string BaseUrl { get; }
         string Url { get; }
-        string Prefix { get; }
         string Navigate { get; }
-        int StartPoint { get; }
-        int EndPoint { get; }
     }
 }

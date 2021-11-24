@@ -1,5 +1,6 @@
 ﻿using ASCOPC.Domain.Contracts;
 using ASCOPC.Infrastructure.Extensions;
+using ASCOPC.Infrastructure.Parser.Citilink;
 using ASCOPC.Shared;
 using System.Diagnostics;
 
@@ -30,38 +31,47 @@ namespace ASCOPC.Infrastructure.Services
         /// <summary>
         /// Add an items to the citilink.ru/order/
         /// </summary>
-        public async Task<IResult> Add(string url)
+        public async Task<IResult> Add(List<int> codes)
         {
             var resultBuilder = OperationResult.CreateBuilder();
-            var path = GetPath();
 
-            if (string.IsNullOrWhiteSpace(path))
-                return resultBuilder.AppendError($"Chrome is required to work: {path} ")
-                    .BuildResult();
-
-            using (Process process = new())
+            foreach (var code in codes)
             {
-                try
-                {
-                    process.StartInfo.FileName = GetPath();
-                    process.StartInfo.Arguments = url + " --new-window";
-                    process.Start();
-                    process.WaitForExit(10000); // Dodge the 429 response
-                }
-                catch (Exception) { }
-                finally
-                {
-                    byte W = 0x57; // The keycode for the W key
+                if (code is 0)
+                    return resultBuilder.AppendError($"Sorry, code item is: {code} ")
+                        .BuildResult();
 
-                    Thread.Sleep(3000); // Second attempt to dodge
-                    CitilinkBucketExtension.SetForegroundWindow(process.Handle);
-                    CitilinkBucketExtension.Send(W, true, false, false, false); // Ctrl+W to close window
+                CitilinkParserSetting navigate = new($"basket/add/product/{code}");
 
-                    // Just in case
-                    process.Dispose();
+                var path = GetPath();
+
+                if (string.IsNullOrWhiteSpace(path))
+                    return resultBuilder.AppendError($"Sorry, chrome.exe is required to work: {path} ")
+                        .BuildResult();
+
+                using (Process process = new())
+                {
+                    try
+                    {
+                        process.StartInfo.FileName = GetPath();
+                        process.StartInfo.Arguments = navigate.Url + " --new-window";
+                        process.Start();
+                        process.WaitForExit(10000); // Dodge the 429 response
+                    }
+                    catch (Exception) { }
+                    finally
+                    {
+                        byte W = 0x57; // The keycode for the W key
+
+                        Thread.Sleep(3000); // Second attempt to dodge
+                        CitilinkBucketExtension.SetForegroundWindow(process.Handle);
+                        CitilinkBucketExtension.Send(W, true, false, false, false); // Ctrl+W to close window
+
+                        // Just in case
+                        process.Dispose();
+                    }
                 }
             }
-
             return resultBuilder.BuildResult();
         }
     }

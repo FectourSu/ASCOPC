@@ -4,7 +4,13 @@ namespace ASCOPC.Shared
 {
     public class OperationResult : IResult
     {
+        public OperationResult()
+        {
+            _errors = new List<string>();
+        }
+
         private List<string> _errors;
+
         public IEnumerable<string> Errors { get => _errors; set => AddErrors(value); }
 
         public bool IsSuccess => _errors.Count == 0;
