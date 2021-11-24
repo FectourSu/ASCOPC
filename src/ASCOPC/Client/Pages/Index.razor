@@ -1,6 +1,7 @@
 ﻿@page "/"
 
 @inject IJSRuntime js
+
  <Builds></Builds>
 
 <div class="asco-wrap">
@@ -53,8 +54,8 @@
     {
         if (aftR)
         {
+           //await js.InvokeVoidAsync("blazorIsNotBlur");
             await js.InvokeVoidAsync("blazorScroll");
-
             await js.InvokeVoidAsync("blazorSelectBox");
         }
     }

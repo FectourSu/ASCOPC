@@ -1,21 +1,27 @@
 ﻿@using ASCOPC.Client.Shared.Modals
 @inject IModalService Modal;
+@inject IJSRuntime js
+
+
 <div class="header__nav">
-    <div class="button__nav" @onclick="@(async () => await ShowModalAsync())"><span class="lnr lnr__buttons lnr-enter"></span></div>
+    <div class="button__nav" @onclick="@(async () => await LoginModalAsync())">
+        <span class="lnr lnr__buttons lnr-enter"></span></div>
     <div class="button__nav"><span class="lnr lnr__buttons lnr-download"></span></div>
-    <div class="button__nav"><span class="lnr lnr__buttons lnr-envelope"></span></div>
+    <div class="button__nav" @onclick="@(async () => await ContactsModalAsync())">
+        <span class="lnr lnr__buttons lnr-envelope"></span></div>
     <div class="button__nav"><span class="lnr lnr__buttons lnr-cart"></span></div>
 </div>
 
 @code{
-    public async Task ShowModalAsync()
+    public async Task LoginModalAsync()
     {
-        var options = new ModalOptions()
-        {
-            Animation = ModalAnimation.FadeIn(0.18)
-        };
+        BlurModal blurModal = new(new MainModal(Modal), js);
+        await blurModal.CreateAsync<Login>();
+    }
 
-        var formModal = Modal.Show<Login>("",options);
-        var result = await formModal.Result;
-     }
+    public async Task ContactsModalAsync()
+    {
+        MainModal main = new(Modal);
+        await main.CreateAsync<Contacts>();
+    }
 }

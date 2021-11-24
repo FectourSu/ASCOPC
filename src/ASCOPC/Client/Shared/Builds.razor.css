@@ -9,7 +9,6 @@
     bottom: 0;
     right: 110px;
     text-transform: uppercase;
-    border: 0.1px solid rgb(148, 107, 249);
     padding: 2em;
     font-size: 0.7em;
     letter-spacing: 0.3em;
@@ -24,4 +23,19 @@
     align-items: center;
     cursor: none;
     background-color: white;
+    box-shadow: 0px 8px 10px rgb(0 0 0 / 15%);
+    border-radius: 20px 20px 0px 0px !important;
+    width: 70px;
+}
+
+@media(max-width:580px) {
+    .feedback {
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        border: 0;
+        box-shadow: 0px 8px 10px rgb(0 0 0 / 15%);
+        height: -2px;
+        border-radius: 20px 20px 0px 0px;
+    }
 }

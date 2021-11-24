@@ -1,5 +1,8 @@
-﻿using OpenQA.Selenium;
+﻿using ASCOPC.Infrastructure.Extensions;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace ASCOPC.Infrastructure.Parser
 {
@@ -12,7 +15,7 @@ namespace ASCOPC.Infrastructure.Parser
 
         }
         public HtmlLoader(string uri)
-        {
+         {
             this.Uri = uri;
 
             _httpClient = new HttpClient();
@@ -24,14 +27,25 @@ namespace ASCOPC.Infrastructure.Parser
         {
             if (string.IsNullOrEmpty(Uri))
                 throw new ArgumentNullException(nameof(Uri));
+
             var options = new ChromeOptions();
-
             options.AddArgument("headless");
-            
-            IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory(), options);
-            driver.Navigate().GoToUrl(this.Uri);
 
-           
+            IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory(), options);
+
+            try
+            {
+                driver.Navigate().GoToUrl(this.Uri);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                driver.Close();
+                driver.Quit();
+            }
 
             return driver.PageSource;
         }

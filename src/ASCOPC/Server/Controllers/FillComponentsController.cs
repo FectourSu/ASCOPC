@@ -1,4 +1,5 @@
 ﻿using ASCOPC.Domain.Contracts;
+using ASCOPC.Infrastructure.Parser;
 using ASCOPC.Infrastructure.Services;
 using ASCOPC.Shared.DTO;
 using ASOPC.Application.Interfaces.Providers;
@@ -30,11 +31,21 @@ namespace ASCOPC.Server.Controllers
             _service = service;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<HttpResponseMessage>> FillComponentItem([FromQuery] string code)
+        [HttpGet]
+        public async Task<ActionResult<string>> FillComponentItem()
         {
-            HttpClient client = new();
-            return await client.GetAsync($"https://www.citilink.ru/basket/add/product/{code}");
+            List<string> links = new() 
+            {
+                "https://www.citilink.ru/basket/add/product/1469012",
+                "https://www.citilink.ru/basket/add/product/1105049",
+                "https://www.citilink.ru/basket/add/product/1078120"
+            };
+            foreach (var link in links)
+            {
+                HtmlLoader client = new(link);
+                await client.GetSource();
+            }
+            return Ok();
         }
     }
 }

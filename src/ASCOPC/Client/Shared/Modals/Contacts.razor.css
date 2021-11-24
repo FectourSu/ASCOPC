@@ -1,0 +1,133 @@
+﻿
+#form {
+    width: 400px;
+    margin: 0 auto;
+    font-size: 0.9em;
+    background-color: white;
+}
+
+input {
+    font-weight: 600;
+    font-size: 0.875em;
+    width: -webkit-fill-available;
+    height: 50px;
+    padding: 0px 15px 0px 15px;
+    background: transparent;
+    outline: none;
+    color: #2d2d2d;
+    border-bottom: none;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    font-size: 1em;
+    -ms-transition: all 0.3s ease-in-out;
+    font-weight: 300;
+}
+
+textarea {
+    height: 200px;
+    max-height: 470px;
+    padding: 15px;
+    width: -webkit-fill-available;
+    background: transparent;
+    outline: none;
+    color: #2d2d2d;
+    font-size: 1em;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+    textarea:focus {
+        box-shadow: 0 5px 54px rgb(0 0 0 / 5%);
+    }
+
+
+#submit {
+    padding: 0;
+    box-shadow: none !important;
+    outline: none;
+    cursor: pointer;
+    border-radius: 0%;
+    border-top: none;
+    font-size: 0.7em;
+    background-color: transparent;
+    letter-spacing: .3em;
+    line-height: 1.6em;
+    font-family: "Montserrat";
+    text-transform: uppercase;
+    font-weight: 400;
+    height: 50px;
+    padding: 20px;
+    color: #946bf9;
+    -webkit-transition: 0.4s;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+    #submit:hover {
+        -webkit-transition: 0.4s;
+        color: #2d2d2d;
+    }
+
+    input:focus {
+        box-shadow: 0 5px 54px rgb(0 0 0 / 5%);
+        transition-property: background, color, buttom, opacity, visibility;
+        transition-duration: .25s;
+    }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.sing__title {
+    color: rgb(0,0,0, 0.5);
+    line-height: 0.6em;
+    font-family: "Montserrat";
+    font-weight: 500;
+    font-size: 0.6em;
+    text-align: center;
+    font-weight: 500;
+    text-align: center;
+}
+
+.overlay__title {
+    font-size: 1.875rem;
+    line-height: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    text-align: center;
+    margin-top: 1.3rem;
+    margin-bottom: 1.7rem;
+    margin-right: 10px;
+}
+
+@media only screen and (max-width: 840px) {
+    .overlay__title {
+        font-size: 1.7rem;
+        line-height: 2rem;
+        margin-bottom: 1.3rem;
+    }
+}
+
+
+@media only screen and (max-width: 300px) {
+    #form {
+        width:250px !important;
+    }
+}
+@media only screen and (max-width: 500px) {
+    #form {
+        width: 300px !important;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    #form {
+        width: 350px;
+    }
+}

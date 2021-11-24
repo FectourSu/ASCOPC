@@ -1,0 +1,15 @@
+﻿<div class="overlay__inner">
+        <h1 class="overlay__title">
+        <span class="sing__title" >Contact us</span>
+        </h1>
+</div>
+<form id="form" class="topBefore">
+   <input id="name" type="text" placeholder="NAME" required="">
+   <input id="email" type="text" placeholder="E-MAIL" required="">
+   <textarea id="message" type="text" placeholder="MESSAGE" required=""></textarea>
+   <input id="submit" type="submit" value="Send">
+</form>
+
+@code{
+    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+}

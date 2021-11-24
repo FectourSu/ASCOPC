@@ -48,3 +48,8 @@
 .lnr-envelope, .lnr-download {
     padding: 0px 0px 3px 1px
 }
+
+
+.blazored-modal {
+    padding: 0 !important;
+}

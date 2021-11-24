@@ -453,3 +453,21 @@ p {
 .form__field label {
     width: 26%;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.login__logo {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    width: 80px;
+    height: 57px;
+}

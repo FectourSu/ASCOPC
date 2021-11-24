@@ -829,6 +829,7 @@ footer {
     border-radius: 10px !important;
     box-shadow: 0 0.75rem 5rem 0 rgb(0 0 0 / 7%) !important;
     background: rgba(255, 255, 255, 0.900) !important;
+    padding: 0 !important;
 }
 
 .blur {
