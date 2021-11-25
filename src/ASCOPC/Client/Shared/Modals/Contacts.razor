@@ -1,4 +1,6 @@
-﻿<div class="overlay__inner">
+﻿@inject HttpClient http
+
+<div class="overlay__inner">
         <h1 class="overlay__title">
         <span class="sing__title" >Contact us</span>
         </h1>
@@ -11,5 +13,6 @@
 </form>
 
 @code{
-    [CascadingParameter] BlazoredModalInstance ModalInstance { get; set; }
+     [CascadingParameter] 
+     BlazoredModalInstance ModalInstance { get; set; }
 }

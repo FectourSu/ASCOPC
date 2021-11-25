@@ -2,11 +2,12 @@
 using ASCOPC.Infrastructure.Extensions;
 using ASCOPC.Infrastructure.Parser.Citilink;
 using ASCOPC.Shared;
+using ASOPC.Application.Interfaces.Services;
 using System.Diagnostics;
 
 namespace ASCOPC.Infrastructure.Services
 {
-    public class CitilinkBucketService
+    public class CitilinkBucketService : ICitilinkBucketService
     {
         /// <summary>
         /// Getting the path to chrome.exe
@@ -31,11 +32,11 @@ namespace ASCOPC.Infrastructure.Services
         /// <summary>
         /// Add an items to the citilink.ru/order/
         /// </summary>
-        public async Task<IResult> Add(List<int> codes)
+        public async Task<IResult> Add(List<int> codeProduct)
         {
             var resultBuilder = OperationResult.CreateBuilder();
 
-            foreach (var code in codes)
+            foreach (var code in codeProduct)
             {
                 if (code is 0)
                     return resultBuilder.AppendError($"Sorry, code item is: {code} ")
@@ -58,7 +59,10 @@ namespace ASCOPC.Infrastructure.Services
                         process.Start();
                         process.WaitForExit(10000); // Dodge the 429 response
                     }
-                    catch (Exception) { }
+                    catch (Exception) 
+                    {
+                        throw;
+                    }
                     finally
                     {
                         byte W = 0x57; // The keycode for the W key

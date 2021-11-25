@@ -13,8 +13,9 @@ namespace ASCOPC.Infrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection collection, IConfiguration configuration)
         {
-
-            collection.AddScoped<IParserService, ParserService>();
+            collection.AddTransient<IEmailService, EmailService>();
+            collection.AddTransient<ICitilinkBucketService, CitilinkBucketService>();
+            collection.AddTransient<IParserService, ParserService>();
 
             collection.AddDbContext<ApplicationDbContext>(options =>
              {

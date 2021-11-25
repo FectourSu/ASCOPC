@@ -20,25 +20,5 @@ namespace ASCOPC.Server.Controllers
         //public async Task<ActionResult<IResult<ComponentsDTO>>> FillComponentItem([FromQuery] string url) =>
         //    Ok(await _provider.FillComponentItem(url));
 
-        private readonly IParserService _service;
-
-        public FillComponentsController(IParserService service)
-        {
-            _service = service;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<Domain.Contracts.IResult>> FillComponentItem()
-        {
-            ///todo incapsulate
-            List<int> links = new()
-            {
-                1469012,
-                1105049,
-                1078120
-            };
-            CitilinkBucketService client = new();
-            return Ok(await client.Add(links));
-        }
-    }
+   }
 }
