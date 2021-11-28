@@ -1,0 +1,18 @@
+﻿@using ASCOPC.Client.Service
+@using ASCOPC.Client.Service.Interfaces
+@using ASCOPC.Client.Shared.Modals
+@using static ASCOPC.Client.Shared.NavMenu
+@inject IModalService Modal;
+@inject IJSRuntime js
+
+<div class="asco-clear-container">
+    <div class="asco-clear-container__button" @onclick="@(async () => await CreateBuildModal())">NEW BUILD</div>
+</div>
+
+@code{
+    public async Task CreateBuildModal()
+    {
+        IMyModalService blurModal = new BlurModal(new MainModal(Modal), js);
+        await blurModal.CreateAsync<BuildModal>();
+    }
+}

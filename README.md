@@ -15,7 +15,7 @@ It is being developed following the example of clean architecture (DDD) <br>
 [Biolerplate](https://github.com/aspnetcorehero/Boilerplate)
 [Ember](https://github.com/TheWayToJunior/Ember-Refactoring)
 
-<br>
+<p>
 <br>
 
 ## Build with

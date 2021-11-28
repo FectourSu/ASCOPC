@@ -4,6 +4,6 @@ namespace ASOPC.Application.Interfaces.Services
 {
     public interface ICitilinkBucketService
     {
-        Task<IResult> Add(List<int> codes);
+        Task<IResult> Add(IEnumerable<int> codes);
     }
 }

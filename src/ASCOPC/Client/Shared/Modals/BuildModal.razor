@@ -1,0 +1,38 @@
+﻿@using ASCOPC.Client.Service.Interfaces
+@inject IJSRuntime Js;
+
+    <div class="overlay__inner" @onkeyup="lazyKey">
+        <h1 class="overlay__title">
+        <span class="sing__title" >New build</span>
+        </h1>
+
+        <div class="addListContent">
+            <div class="styled-input">
+                <input type="text" required maxlength="25"/>
+                <label>Name</label>
+                <span></span>
+            </div>
+            <div class="buttonAdd" @onclick="async () => { modal.Click(); await Add();}">
+                <a>Add</a>
+            </div>
+        </div>
+    </div>
+@code{
+    [CascadingParameter] 
+    BlazoredModalInstance ModalInstance { get; set; }
+
+    [Inject]
+    private IBuildModalService modal { get; set; }
+
+    public async Task Add()
+    {
+        await ModalInstance.CloseAsync();
+        await Js.InvokeVoidAsync("blazorNotBlur");
+    }
+
+    public async Task lazyKey(KeyboardEventArgs keyboard)
+    {
+        if (keyboard.Key == "Enter")
+            await Add();
+    }
+}

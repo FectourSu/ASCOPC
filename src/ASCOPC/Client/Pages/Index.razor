@@ -1,10 +1,11 @@
 ﻿@page "/"
+@using ASCOPC.Client.Shared.Modals
 
 @inject IJSRuntime js
 
- <Builds></Builds>
+<BuildsModal></BuildsModal>
 
-<div class="asco-wrap">
+<div class="asco-wrap" >
     <BlazorAnimate.Animate Animation="Animations.FadeIn" Duration="TimeSpan.FromSeconds(2)">
         <header>
             <Account></Account>
@@ -34,9 +35,7 @@
                <Categories></Categories>
             </div>
             <Cards></Cards>
-            <div class="asco-clear-container">
-                <div class="asco-clear-container__button">Clear All</div>
-            </div>
+            <CreateBuild></CreateBuild>
         </main>
         </BlazorAnimate.Animate>
         

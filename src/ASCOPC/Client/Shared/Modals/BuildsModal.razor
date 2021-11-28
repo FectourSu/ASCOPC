@@ -1,0 +1,49 @@
+﻿<div class="@(modal.IsOpen.Value ? "filter" : string.Empty)" @onclick="modal.Click"></div>
+
+<div class="modal custom @cssClassShow" id="trackModal" tabindex="-1"
+     role="dialog" aria-labelledby="trackModalLabel" aria-hidden="true">
+    <div class="modal-dialog @(modal.IsOpen.Value ? "modal-enable" : string.Empty)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal__header-title">BUILDS</span>
+            </div>
+            <div class="modal-body">
+
+                    <div class="list">
+                        <div class="build__content">
+                           <span class="lnr lnr-laptop"></span>
+                            <p>Buildasdasdasdasdasdasdasds1</p>
+                        </div>
+                        <span class="lnr lnr-cross"></span>
+                    </div>
+                    <div class="list">
+                        <div class="build__content">
+                           <span class="lnr lnr-laptop"></span>
+                            <p>Build1</p>
+                        </div>
+                        <span class="lnr lnr-cross"></span>
+                    </div>
+                    <div class="list">
+                        <div class="build__content">
+                           <span class="lnr lnr-laptop"></span>
+                            <p>Build1</p>
+                        </div>
+                        <span class="lnr lnr-cross"></span>
+                    </div><div class="list">
+                        <div class="build__content">
+                           <span class="lnr lnr-laptop"></span>
+                            <p>Build1</p>
+                        </div>
+                        <span class="lnr lnr-cross"></span>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a target="_blank">
+	<div class="feedback @(modal.IsOpen.Value ? "is-active" : null)" 
+               @onclick="modal.Click">
+		<span class="lnr lnr-laptop-phone" style="font-size: 2em;"></span>	
+	</div>
+</a>

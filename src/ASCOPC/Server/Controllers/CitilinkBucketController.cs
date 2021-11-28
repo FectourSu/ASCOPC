@@ -15,8 +15,8 @@ namespace ASCOPC.Server.Controllers
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IResult>> FillComponentItem(List<int> codeProduct) =>
+        [HttpPost]
+        public async Task<ActionResult<IResult>> FillComponentItem([FromBody]IEnumerable<int> codeProduct) =>
             Ok(await _service.Add(codeProduct));
     }
 }

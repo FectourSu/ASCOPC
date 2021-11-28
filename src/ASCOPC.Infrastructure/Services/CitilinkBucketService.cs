@@ -32,7 +32,7 @@ namespace ASCOPC.Infrastructure.Services
         /// <summary>
         /// Add an items to the citilink.ru/order/
         /// </summary>
-        public async Task<IResult> Add(List<int> codeProduct)
+        public async Task<IResult> Add(IEnumerable<int> codeProduct)
         {
             var resultBuilder = OperationResult.CreateBuilder();
 
@@ -67,7 +67,7 @@ namespace ASCOPC.Infrastructure.Services
                     {
                         byte W = 0x57; // The keycode for the W key
 
-                        Thread.Sleep(3000); // Second attempt to dodge
+                        Thread.Sleep(2000); // Second attempt to dodge
                         CitilinkBucketExtension.SetForegroundWindow(process.Handle);
                         CitilinkBucketExtension.Send(W, true, false, false, false); // Ctrl+W to close window
 

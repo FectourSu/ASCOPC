@@ -20,13 +20,15 @@
 }
 
 .circle_active {
-    box-shadow: 0 5px 54px rgb(170 130 400 / 25%);
+    box-shadow: 0 5px 54px rgb(148 107 249 / 25%);
 }
 
 .lnr__user {
     color: #946bf9;
 }
-
+.circle{
+    margin-right: -10px;
+}
 .account__name {
     font-size: 12px;
     padding-right: 22px;
@@ -95,3 +97,11 @@
     background-color: white;
 }
 
+.filter {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}

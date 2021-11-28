@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Shared\Modals\BuildModal.razor~RF75a39ea.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\Blur.js" />
   </ItemGroup>
 

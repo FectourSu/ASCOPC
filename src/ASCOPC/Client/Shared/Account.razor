@@ -1,11 +1,16 @@
-﻿<div class="header__content">
+﻿@using ASCOPC.Client.Service.Interfaces
+@using ASCOPC.Client.Shared.Modals;
+@using static ASCOPC.Client.Shared.NavMenu;
+@inject IModalService Modal;
+
+<div class="header__content">
     <img src="img/logo.svg" class="asco-logo" />
     <div class="account__container @(IsActive ? "is-active" : "")" @onclick="@Toggle">
         <div class="circle @(IsActive ? "circle_active" : "")">
         <span class="account__name">Hi, <span style="font-weight:600">username</span>!</span>
         <span class="lnr lnr__user lnr-user"></span></div>
         <ul>
-            <li><a href="#">Builds</a></li>
+            <li><a @onclick="modal.Click">Builds</a></li>
             <li><a href="#">Logout</a></li>
         </ul>
     </div>
@@ -14,8 +19,12 @@
 @code{
     private bool IsActive { get; set; } = false;
 
+    [Inject]
+    private IBuildModalService modal { get; set; }
+
     private void Toggle()
     {
         IsActive = !IsActive;
     }
+
 }
