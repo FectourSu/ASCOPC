@@ -6,9 +6,6 @@ namespace ASCOPC.Client.Shared.Modals
 {
     public partial class BuildsModal
     {
-        [CascadingParameter]
-        BlazoredModalInstance ModalInstance { get; set; }
-
         [Inject]
         private IBuildModalService modal { get; set; }
 

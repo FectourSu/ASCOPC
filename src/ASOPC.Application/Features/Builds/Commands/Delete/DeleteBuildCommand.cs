@@ -1,6 +1,6 @@
 ﻿using ASCOPC.Domain.Contracts;
-using ASCOPC.Domain.Entities;
 using ASCOPC.Infrastructure.Data.Enums;
+using ASCOPC.Shared.DTO;
 using MediatR;
 
 namespace ASOPC.Application.Features.Builds.Commands.Delete
@@ -11,6 +11,6 @@ namespace ASOPC.Application.Features.Builds.Commands.Delete
         public string Name { get; set; }
         public Category Categories { get; set; }
         public decimal Price { get; set; }
-        public virtual ICollection<Component> Components { get; set; }
+        public virtual ICollection<ComponentsDTO> Components { get; set; }
     }
 }

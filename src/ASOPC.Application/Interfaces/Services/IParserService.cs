@@ -5,7 +5,7 @@ namespace ASOPC.Application.Interfaces.Services
 {
     public interface IParserService
     {
-        Task<ComponentsDTO> ParseItem(string url);
         Task<ComponentsDTO> ParseProductItem(string url);
+        Task<ComponentsDTO> ParseItem(string url);
     }
 }

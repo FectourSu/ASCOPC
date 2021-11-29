@@ -1,7 +1,6 @@
 ﻿using ASCOPC.Domain.Contracts;
-using ASCOPC.Shared.DTO;
 
-namespace ASOPC.Application.Interfaces.Providers
+namespace ASOPC.Application.Interfaces.Provider
 {
     public interface IFillComponentProvider<TEntity>
         where TEntity : class

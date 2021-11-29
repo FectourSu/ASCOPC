@@ -12,7 +12,7 @@
                 <label>Name</label>
                 <span></span>
             </div>
-            <div class="buttonAdd" @onclick="async () => { modal.Click(); await Add();}">
+            <div class="buttonAdd" @onclick="async () => { await Add();}">
                 <a>Add</a>
             </div>
         </div>
@@ -26,6 +26,7 @@
 
     public async Task Add()
     {
+        modal.Click();
         await ModalInstance.CloseAsync();
         await Js.InvokeVoidAsync("blazorNotBlur");
     }

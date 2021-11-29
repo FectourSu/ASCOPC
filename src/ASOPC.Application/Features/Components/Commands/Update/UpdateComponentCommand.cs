@@ -1,5 +1,5 @@
 ﻿using ASCOPC.Domain.Contracts;
-using ASCOPC.Domain.Entities;
+using ASCOPC.Shared.DTO;
 using MediatR;
 
 namespace ASOPC.Application.Features.Components.Commands.Update
@@ -16,7 +16,7 @@ namespace ASOPC.Application.Features.Components.Commands.Update
         public int Code { get; set; }
         public string Manufacturer { get; set; }
         public string Type { get; set; }
-        public virtual ICollection<Specifications> Specification { get; set; }
+        public virtual ICollection<SpecificationsDTO> Specification { get; set; }
 
         public class UpdateComponentCommandHandler : IRequestHandler<UpdateComponentCommand, IResult>
         {

@@ -1,4 +1,4 @@
-﻿using ASCOPC.Domain.Entities;
+﻿using ASCOPC.Shared.DTO;
 
 namespace ASOPC.Application.Features.Components.Queries.Get
 {
@@ -12,6 +12,6 @@ namespace ASOPC.Application.Features.Components.Queries.Get
         public string Desciption { get; set; }
         public string Manufacturer { get; set; }
         public string Type { get; set; }
-        public virtual ICollection<Specifications> Specification { get; set; }
+        public virtual ICollection<SpecificationsDTO> Specification { get; set; }
     }
 }

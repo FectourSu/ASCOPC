@@ -17,8 +17,4 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Responses\" />
-  </ItemGroup>
 </Project>
