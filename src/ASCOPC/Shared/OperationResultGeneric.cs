@@ -8,7 +8,6 @@ namespace ASCOPC.Shared
         public OperationResult(T value = null)
         {
             Value = value;
-            CreateBuilder();
         }
         public T Value { get; private set; }
 
@@ -17,7 +16,10 @@ namespace ASCOPC.Shared
             Value = responseObj;
             return this;
         }
-        public static new OperationResultBuilder<T> CreateBuilder() => new();
+        public static new OperationResultBuilder<T> CreateBuilder()
+        {
+            return new OperationResultBuilder<T>();
+        }
         
     }
     public class OperationResultBuilder<T> : OperationResultBuilder 
@@ -39,7 +41,7 @@ namespace ASCOPC.Shared
 
         public OperationResultBuilder<T> SetValue(T value)
         {
-            _ = (OperationResult as OperationResult<T>).SetValue(value);
+            (OperationResult as OperationResult<T>).SetValue(value);
             return this;
         }
     }

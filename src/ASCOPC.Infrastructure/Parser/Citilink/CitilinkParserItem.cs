@@ -14,12 +14,13 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
 
             var name = ParseTextContent(document,
                 "div.ProductCardLayout__product-description div h1").Trim();
-            item.Name = Regex.Replace(name, @"[а-яА-ЯёЁ]", "").TrimStart();
+            item.Name = Regex.Replace(name, @"[а-яА-ЯёЁ+^()]", "").TrimStart();
 
             var code = ParseTextContent(document,
                 "div.ProductCardLayout__product-description " +
                 "div div.ProductHeader__info div.ProductHeader__product-id").Trim();
-            item.Code = int.Parse(Regex.Replace(code, @"[[а-яА-ЯёЁ:\s]", ""));
+            item.Code = int.Parse(Regex
+                .Replace(code, @"[[а-яА-ЯёЁ:\s]", ""));
 
             item.Manufacturer = ParseTextContent(document, 
                 "div.ProductCardLayout__breadcrumbs div div div:nth-child(4) a span").Trim();
@@ -39,8 +40,12 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
             if (String.IsNullOrWhiteSpace(inStock))
             {
                 item.InStock = true;
-                item.Price = decimal.Parse(ParseTextContent(document,
-                    "span.ProductHeader__price-default_current-price"));
+                
+                var price = ParseTextContent(document,
+                    "span.ProductHeader__price-default_current-price").Trim();
+                item.Price = decimal.Parse(string
+                    .Join(".", price
+                    .Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)));
             }
 
             item.UrlImage = ParseAttribute(document,

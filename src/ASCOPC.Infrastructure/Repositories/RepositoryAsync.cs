@@ -1,4 +1,5 @@
-﻿using ASCOPC.Domain.Interfaces;
+﻿using ASCOPC.Domain.Common;
+using ASCOPC.Domain.Interfaces;
 using ASCOPC.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ namespace ASCOPC.Infrastructure.Repositories
         {
             _dbContext = dbContext; 
         }
-        public IQueryable<TEntity> Entities => throw new NotImplementedException();
+        public IQueryable<TEntity> Entities => _dbContext.Set<TEntity>();
 
         public async Task<long> CountAsync() => 
             await _dbContext.Set<TEntity>().CountAsync();
@@ -30,7 +31,7 @@ namespace ASCOPC.Infrastructure.Repositories
         }
 
         public async Task<List<TEntity>> GetAllAsync() =>
-            await _dbContext.Set<TEntity>().ToListAsync();
+            await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
 
         public virtual async Task<TEntity> GetByIdAsync(int id) => 
             await _dbContext.Set<TEntity>().FindAsync(id);
@@ -43,9 +44,14 @@ namespace ASCOPC.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync();
 
-        public Task UpdateEntity(TEntity entity)
+        public Task UpdateEntity(TEntity entity, int Id)
         {
-            _dbContext.Entry(entity).CurrentValues.SetValues(entity);
+            TEntity exist = _dbContext.Set<TEntity>()
+                .Find(Id);
+
+            _dbContext.Entry(exist).CurrentValues
+                .SetValues(entity);
+
             return Task.CompletedTask;
         }
     }

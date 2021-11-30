@@ -1,9 +1,6 @@
-﻿using ASCOPC.Domain.Contracts;
-using ASCOPC.Infrastructure.Parser;
+﻿using ASCOPC.Infrastructure.Parser;
 using ASCOPC.Infrastructure.Parser.Citilink;
-using ASCOPC.Shared;
 using ASCOPC.Shared.DTO;
-using ASOPC.Application.Interfaces.Parser;
 using ASOPC.Application.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
@@ -32,7 +29,25 @@ namespace ASCOPC.Infrastructure.Services
 
             return item;
         }
+      
+        private async Task<ComponentsDTO> ParseProductItem(string url)
+        {
+            var item = new ComponentsDTO();
 
+            var parser = new ParserWorker<ComponentsDTO>(new CitilinkParserItem());
+
+            parser.OnCompleted += (s, e) =>
+            {
+                _logger.LogInformation($"{e.Name} - successfully paired");
+                item = e;
+            };
+
+            parser.Uri = url;
+
+            await parser.Start();
+
+            return item;
+        }
 
         ///TODO: automatically parse components by pages
         //public async Task<IEnumerable<string>> ParseProductLink(IParserSettings settings)
@@ -72,24 +87,5 @@ namespace ASCOPC.Infrastructure.Services
 
         //    return href;
         //}
-
-        public async Task<ComponentsDTO> ParseProductItem(string url)
-        {
-            var item = new ComponentsDTO();
-
-            var parser = new ParserWorker<ComponentsDTO>(new CitilinkParserItem());
-
-            parser.OnCompleted += (s, e) =>
-            {
-                _logger.LogInformation($"{e.Name} - successfully paired");
-                item = e;
-            };
-
-            parser.Uri = url;
-
-            await parser.Start();
-
-            return item;
-        }
     }
 }

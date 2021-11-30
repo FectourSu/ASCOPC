@@ -2,9 +2,8 @@
 
 namespace ASOPC.Application.Interfaces.Provider
 {
-    public interface IFillComponentProvider<TEntity>
-        where TEntity : class
+    public interface IFillComponentProvider
     {
-        Task<IResult<TEntity>> FillComponent(string url);
+        Task<IResult> FillComponent(string url);
     }
 }

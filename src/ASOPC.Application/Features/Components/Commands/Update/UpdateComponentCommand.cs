@@ -1,29 +1,53 @@
 ﻿using ASCOPC.Domain.Contracts;
+using ASCOPC.Domain.Entities;
+using ASCOPC.Shared;
 using ASCOPC.Shared.DTO;
+using ASOPC.Application.Interfaces.Data;
+using ASOPC.Application.Interfaces.Services;
+using AutoMapper;
 using MediatR;
 
 namespace ASOPC.Application.Features.Components.Commands.Update
 {
-    public class UpdateComponentCommand : IRequest<IResult>
+    public class UpdateComponentCommand : ComponentCommand
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string UrlImage { get; set; }
-        public bool InStock { get; set; }
-        public decimal Rating { get; set; }
-        public string Desciption { get; set; }
-        public int Code { get; set; }
-        public string Manufacturer { get; set; }
-        public string Type { get; set; }
-        public virtual ICollection<SpecificationsDTO> Specification { get; set; }
 
         public class UpdateComponentCommandHandler : IRequestHandler<UpdateComponentCommand, IResult>
         {
-            public Task<IResult> Handle(UpdateComponentCommand request, CancellationToken cancellationToken)
+            private readonly IUnitOfWork _unitOfWork;
+            private readonly IMapper _mapper;
+            private readonly IComponentMapService _componentService;
+
+            public UpdateComponentCommandHandler(IUnitOfWork unitOfWork, IMapper mapper, IComponentMapService componentService)
             {
-                throw new NotImplementedException();
+                _unitOfWork = unitOfWork;
+                _mapper = mapper;
+                _componentService = componentService;
             }
+
+            public async Task<IResult> Handle(UpdateComponentCommand request, CancellationToken cancellationToken)
+            {
+                var result = OperationResult.CreateBuilder();
+                var repository = _unitOfWork.Repository<Component>();
+
+                var entity = await repository.GetByIdAsync(request.Id);
+
+                await _componentService.ComponentMappingAsync(request, entity);
+
+                try
+                {
+                    await repository.UpdateEntity(entity, entity.Id);
+                    await _unitOfWork.SaveChangeAsync(cancellationToken);
+                }
+                catch (Exception ex)
+                {
+                    result.AppendError(ex.Message);
+                }
+
+                return result.BuildResult();
+            }
+            
         }
     }
 }

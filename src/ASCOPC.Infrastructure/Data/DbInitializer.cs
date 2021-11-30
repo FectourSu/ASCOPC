@@ -84,34 +84,7 @@ namespace ASCOPC.Infrastructure.Data
                     }
               });
 
-            builder.Entity<Specifications>().HasData(
-              new Specifications[]
-              {
-                    new Specifications
-                    {
-                        Id = 1,
-                        CreateAt = DateTime.Now,
-                        SpecificationTitle =
-                        "Гарантия " +
-                        "Страна-производитель " +
-                        "Модель " +
-                        "Код производителя " +
-                        "Год релиза " +
-                        "Сокет " +
-                        "Система охлаждения в комплекте " +
-                        "Термоинтерфейс в комплекте",
-                        SpecificationValue =
-                        "12 мес. " +
-                        "Китай " +
-                        "AMD Ryzen 5 3600 " +
-                        "100-000000031" +
-                        "2019" +
-                        "AM4" +
-                        "нет" +
-                        "нет"
-                    }
-              });
-
+           
             builder.Entity<ComponentType>().HasData(
               new ComponentType[]
               {
@@ -144,16 +117,6 @@ namespace ASCOPC.Infrastructure.Data
                         Price = 17.699m,
                         ManufacturerId = 1,
                         TypeId = 1,
-                    }
-              });
-
-            builder.Entity<SpecificationComponent>().HasData(
-              new SpecificationComponent[]
-              {
-                    new SpecificationComponent
-                    {
-                        SpecificationId = 1,
-                        ComponentId = 1
                     }
               });
         }

@@ -30,7 +30,7 @@ namespace ASCOPC.Infrastructure.Repositories
             {
                 var repositoryType = typeof(RepositoryAsync<,>);
                 var repositoryInstance = Activator.CreateInstance(
-                    repositoryType.MakeGenericType(typeof(TEntity)), _context);
+                    repositoryType.MakeGenericType(typeof(TEntity), typeof(int)), _context);
 
                 _repositories.Add(type, repositoryInstance);
             }    

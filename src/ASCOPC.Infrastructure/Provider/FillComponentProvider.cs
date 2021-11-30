@@ -1,54 +1,38 @@
 ﻿using ASCOPC.Domain.Contracts;
-using ASCOPC.Domain.Entities;
 using ASCOPC.Shared;
 using ASCOPC.Shared.DTO;
+using ASOPC.Application.Features.Components.Commands.Create;
 using ASOPC.Application.Interfaces.Provider;
 using ASOPC.Application.Interfaces.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using AutoMapper;
+using MediatR;
 
 namespace ASCOPC.Infrastructure.Provider
 {
-    public class FillComponentProvider// : IFillComponentProvider<Component>
+    public class FillComponentProvider : IFillComponentProvider
     {
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
         private readonly IParserService _parser;
-        private readonly IComponentService _component;
-        public FillComponentProvider(IParserService parser, IComponentService component)
+        public FillComponentProvider(IParserService parser, IMediator mediator, IMapper mapper)
         {
+            _mediator = mediator;
+            _mapper = mapper;
             _parser = parser;
-            _component = component;
         }
 
-        //public async Task<IResult<Component>> FillComponent(string url)
-        //{
-            //var resultBuilder = OperationResult<ComponentsDTO>.CreateBuilder();
+        public async Task<IResult> FillComponent(string url)
+        {
+            var resultBuilder = OperationResult<ComponentsDTO>.CreateBuilder();
 
-            //ComponentsDTO response = null;
-            //try
-            //{
-            //    var item = await _parser.ParseItem(url);
+            var item = await _parser.ParseItem(url);
+            var command = _mapper.Map<CreateComponentCommand>(item);
+            var result = await _mediator.Send(command);
 
-            //    if (item == null)
-            //        return resultBuilder.AppendError($"{item} is null")
-            //            .BuildResult();
+            if (!result.IsSuccess)
+                resultBuilder.AppendErrors(result.Errors);
 
-            //    var result = await _component.Add();
-            //    if (!result.Successed)
-            //        return resultBuilder.AppendError($"{result} is null")
-            //            .BuildResult();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    return resultBuilder.AppendError(ex.Message)
-            //        .BuildResult();
-            //}
-
-            //return resultBuilder.SetValue(response)
-            //    .BuildResult();
-        //}
+            return resultBuilder.BuildResult();
+        }
     }
 }

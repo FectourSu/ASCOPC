@@ -1,6 +1,10 @@
 ﻿using ASCOPC.Infrastructure.Data;
 using ASCOPC.Infrastructure.Data.Entities;
+using ASCOPC.Infrastructure.Provider;
+using ASCOPC.Infrastructure.Repositories;
 using ASCOPC.Infrastructure.Services;
+using ASOPC.Application.Interfaces.Data;
+using ASOPC.Application.Interfaces.Provider;
 using ASOPC.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +17,12 @@ namespace ASCOPC.Infrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection collection, IConfiguration configuration)
         {
-            collection.AddTransient<IEmailService, EmailService>();
-            collection.AddTransient<ICitilinkBucketService, CitilinkBucketService>();
-            collection.AddTransient<IParserService, ParserService>();
+            collection.AddScoped<IEmailService, EmailService>();
+            collection.AddScoped<ICitilinkBucketService, CitilinkBucketService>();
+            collection.AddScoped<IParserService, ParserService>();
+            collection.AddScoped<IComponentMapService, ComponentMapService>();
+            collection.AddScoped<IFillComponentProvider, FillComponentProvider>();
+            collection.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
             collection.AddDbContext<ApplicationDbContext>(options =>
              {

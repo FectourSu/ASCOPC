@@ -1,6 +1,7 @@
 using ASCOPC.Infrastructure.Data;
 using ASCOPC.Infrastructure.Extensions;
 using Microsoft.AspNetCore.StaticFiles;
+using ASOPC.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,9 @@ var options = new StaticFileOptions
 
 // connection custom DI extension
 builder.Services.AddInfrastructure(builder.Configuration);
+
+// connection mediatr & automapper
+builder.Services.AddApplication();
 
 // auth
 builder.Services.AddMvcCore()

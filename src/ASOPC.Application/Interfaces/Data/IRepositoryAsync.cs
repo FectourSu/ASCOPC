@@ -13,7 +13,7 @@
 
         Task<TEntity> AddEntity(TEntity entity);
 
-        Task UpdateEntity(TEntity entity);
+        Task UpdateEntity(TEntity entity, int id);
 
         Task DeleteEntity(TEntity entity);
 

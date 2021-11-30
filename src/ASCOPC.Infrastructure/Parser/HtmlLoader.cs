@@ -36,6 +36,7 @@ namespace ASCOPC.Infrastructure.Parser
             try
             {
                 driver.Navigate().GoToUrl(this.Uri);
+                return driver.PageSource;
             }
             catch (Exception)
             {
@@ -46,8 +47,6 @@ namespace ASCOPC.Infrastructure.Parser
                 driver.Close();
                 driver.Quit();
             }
-
-            return driver.PageSource;
         }
 
     }

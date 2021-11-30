@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\ASCOPC.Infrastructure\ASCOPC.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\ASOPC.Application\ASOPC.Application.csproj" />
     <ProjectReference Include="..\Client\ASCOPC.Client.csproj" />
     <ProjectReference Include="..\Shared\ASCOPC.Shared.csproj" />
   </ItemGroup>
