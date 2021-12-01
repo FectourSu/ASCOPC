@@ -4,7 +4,7 @@
 
 <h3 align="center">
 
- [About](#about) - [Build with](#build-with) - [Settings](#settings) - [Disclaimer](#disclaimer) - [TODO's](#todos)
+ [About](#about) - [Build with](#build-with) - [Disclaimer](#disclaimer) - [TODO's](#todos)
 
 </h3>
 
@@ -23,11 +23,6 @@ It is being developed following the example of clean architecture (DDD) <br>
 * ASP.NET Core 6 
 * ASP.NET Core BlazorWebAssebmly 6 
 * ASP.NET Core Restfull-WebAPI 
-<p>
-<br>
-
-# Settings
-docker soon....
 <p>
 <br>
 
