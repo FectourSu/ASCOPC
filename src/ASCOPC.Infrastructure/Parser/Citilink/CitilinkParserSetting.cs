@@ -9,7 +9,6 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
 {
     public class CitilinkParserSetting : IParserSettings
     {
-
         public CitilinkParserSetting(string nav)
         {
             Navigate = nav;
@@ -20,7 +19,6 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
         {
 
         }
-
       
         public string Url => $"{BaseUrl}/{Navigate}";
         public string Navigate { get; private set; }
@@ -39,6 +37,7 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
                 return isValidCategory;
             }
         }
+
         // TODO: serialize in file
         private HashSet<string> NavigateCategory => new()
         {

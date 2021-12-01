@@ -16,7 +16,7 @@ namespace ASCOPC.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<IResult>> FillComponentItem([FromBody]IEnumerable<int> codeProduct) =>
+        public async Task<ActionResult<IResult>> PushBasket([FromBody]IEnumerable<int> codeProduct) =>
             Ok(await _service.Add(codeProduct));
     }
 }

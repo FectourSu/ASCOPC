@@ -17,7 +17,7 @@ namespace ASCOPC.Server.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteComponent(int id) =>
+        public async Task<ActionResult> Delete(int id) =>
             Ok(await _mediator.Send(new DeleteComponentCommand { Id = id }));
     }
 }

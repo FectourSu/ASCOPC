@@ -22,6 +22,7 @@ namespace ASCOPC.Infrastructure.Extensions
             collection.AddScoped<IParserService, ParserService>();
             collection.AddScoped<IComponentMapService, ComponentMapService>();
             collection.AddScoped<IFillComponentProvider, FillComponentProvider>();
+            collection.AddScoped<IBuildsService, BuildsService>();
             collection.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
 
             collection.AddDbContext<ApplicationDbContext>(options =>

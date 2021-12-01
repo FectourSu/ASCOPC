@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework" Version="2.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\ASCOPC.Domain\ASCOPC.Domain.csproj" />
   </ItemGroup>
 
