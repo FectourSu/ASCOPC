@@ -2,7 +2,7 @@
 
 namespace ASOPC.Application.Interfaces.Services
 {
-    public interface ICitilinkBucketService
+    public interface ICitilinkBasketService
     {
         Task<IResult> Add(IEnumerable<int> codes);
     }

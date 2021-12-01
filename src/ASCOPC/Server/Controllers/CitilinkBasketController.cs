@@ -6,11 +6,11 @@ namespace ASCOPC.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CitilinkBucketController : ControllerBase
+    public class CitilinkBasketController : ControllerBase
     {
-        private readonly ICitilinkBucketService _service;
+        private readonly ICitilinkBasketService _service;
 
-        public CitilinkBucketController(ICitilinkBucketService service)
+        public CitilinkBasketController(ICitilinkBasketService service)
         {
             _service = service ?? throw new ArgumentNullException(nameof(service));
         }

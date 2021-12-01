@@ -59,3 +59,4 @@ docker soon....
 * [x] Link the above additions through the MediatR pattern
 * [ ] Add commands to each operation
 * [x] Implement the possibility of adding to the cart citilink.ru items
+* [x] Add [Citilink](https://www.citilink.ru/) push basket service

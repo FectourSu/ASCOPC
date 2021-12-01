@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace ASCOPC.Infrastructure.Services
 {
-    public class CitilinkBucketService : ICitilinkBucketService
+    public class CitilinkBasketService : ICitilinkBasketService
     {
         /// <summary>
         /// Getting the path to chrome.exe

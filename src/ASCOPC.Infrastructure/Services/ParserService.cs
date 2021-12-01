@@ -1,5 +1,7 @@
-﻿using ASCOPC.Infrastructure.Parser;
+﻿using ASCOPC.Domain.Contracts;
+using ASCOPC.Infrastructure.Parser;
 using ASCOPC.Infrastructure.Parser.Citilink;
+using ASCOPC.Shared;
 using ASCOPC.Shared.DTO;
 using ASOPC.Application.Interfaces.Services;
 using Microsoft.Extensions.Logging;
@@ -29,7 +31,7 @@ namespace ASCOPC.Infrastructure.Services
 
             return item;
         }
-      
+
         private async Task<ComponentsDTO> ParseProductItem(string url)
         {
             var item = new ComponentsDTO();
@@ -43,6 +45,15 @@ namespace ASCOPC.Infrastructure.Services
             };
 
             parser.Uri = url;
+
+            CitilinkParserSetting citilinkParser = new();
+            citilinkParser.FullUrl = parser.Uri;
+
+            // TODO: create exception
+            if (!citilinkParser.IsValidCategory)
+               throw new Exception($"Sorry parsing of this " +
+                    $"{url.Split(citilinkParser.BaseUrl.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)} " +
+                    $"of component is not possible");
 
             await parser.Start();
 

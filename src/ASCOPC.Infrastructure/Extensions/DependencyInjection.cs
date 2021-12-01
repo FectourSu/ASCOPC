@@ -18,7 +18,7 @@ namespace ASCOPC.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructure(this IServiceCollection collection, IConfiguration configuration)
         {
             collection.AddScoped<IEmailService, EmailService>();
-            collection.AddScoped<ICitilinkBucketService, CitilinkBucketService>();
+            collection.AddScoped<ICitilinkBasketService, CitilinkBasketService>();
             collection.AddScoped<IParserService, ParserService>();
             collection.AddScoped<IComponentMapService, ComponentMapService>();
             collection.AddScoped<IFillComponentProvider, FillComponentProvider>();
