@@ -12,6 +12,6 @@
         public int Code { get; set; }
         public string Manufacturer { get; set; }
         public string Type { get; set; }
-        public virtual ICollection<SpecificationsDTO> Specification { get; set; }
+        public ICollection<SpecificationsDTO> Specification { get; set; }
     }
 }

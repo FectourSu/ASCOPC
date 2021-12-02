@@ -19,8 +19,7 @@ namespace ASCOPC.Infrastructure.Data.Configurations
                 .IsRequired();
 
             builder.HasOne(u => u.User)
-                .WithMany(u => u.Builds)
-                .IsRequired();
+                .WithMany(u => u.Builds);
         }
     }
 }

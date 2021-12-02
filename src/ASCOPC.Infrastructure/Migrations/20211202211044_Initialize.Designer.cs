@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASCOPC.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211129212130_ChangeSpecCompConfig")]
-    partial class ChangeSpecCompConfig
+    [Migration("20211202211044_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -89,7 +89,7 @@ namespace ASCOPC.Infrastructure.Migrations
                         {
                             Id = 1,
                             Code = 1372637,
-                            CreateAt = new DateTime(2021, 11, 30, 0, 21, 29, 361, DateTimeKind.Local).AddTicks(9318),
+                            CreateAt = new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(5047),
                             Desciption = "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует высоким уровнем производительности подавляющее большинство пользователей. Устройство будет уверенно себя чувствовать в составе мощной игровой системы. Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. Важной особенностью процессора является очень большой объем кэша третьего уровня: величина этого показателя равна 32 МБ. Объем кэша L2 – 3 МБ.",
                             InStock = true,
                             ManufacturerId = 1,
@@ -133,7 +133,7 @@ namespace ASCOPC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2021, 11, 30, 0, 21, 29, 361, DateTimeKind.Local).AddTicks(9300),
+                            CreateAt = new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(5033),
                             Name = "Процессор",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -170,14 +170,14 @@ namespace ASCOPC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2021, 11, 30, 0, 21, 29, 361, DateTimeKind.Local).AddTicks(9128),
+                            CreateAt = new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(4888),
                             Name = "AMD",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2021, 11, 30, 0, 21, 29, 361, DateTimeKind.Local).AddTicks(9139),
+                            CreateAt = new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(4899),
                             Name = "Intel",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -194,13 +194,6 @@ namespace ASCOPC.Infrastructure.Migrations
                     b.HasKey("ComponentId", "SpecificationId");
 
                     b.ToTable("SpecificationsComponents", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            ComponentId = 1,
-                            SpecificationId = 1
-                        });
                 });
 
             modelBuilder.Entity("ASCOPC.Domain.Entities.Specifications", b =>
@@ -234,16 +227,6 @@ namespace ASCOPC.Infrastructure.Migrations
                     b.HasIndex("Id");
 
                     b.ToTable("Specifications", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreateAt = new DateTime(2021, 11, 30, 0, 21, 29, 361, DateTimeKind.Local).AddTicks(9284),
-                            SpecificationTitle = "Гарантия Страна-производитель Модель Код производителя Год релиза Сокет Система охлаждения в комплекте Термоинтерфейс в комплекте",
-                            SpecificationValue = "12 мес. Китай AMD Ryzen 5 3600 100-0000000312019AM4нетнет",
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("ASCOPC.Infrastructure.Data.Entities.Builds", b =>

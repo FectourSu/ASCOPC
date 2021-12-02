@@ -23,18 +23,18 @@ namespace ASCOPC.Infrastructure.Data
 
             _logger.LogInformation($"Created role: {roleName}");
         }
-
-        private static async Task CreateAdminAsync()
+        
+        private static async Task CreateRolesAsync(string email, string username, string password, string role)
         {
-            var powerUser = new User(email: "admin@gmail.com", userName: "admin");
-            string adminPassword = "FectourSu1488";
+            var powerUser = new User(email: email, userName: username);
+            string adminPassword = password;
 
             var result = await _userManager.CreateAsync(powerUser, adminPassword);
 
             if (!result.Succeeded)
                 _logger.LogError($"Error: {string.Join("\n", result.Errors.Select(e => e.Description))}");
 
-            await _userManager.AddToRoleAsync(powerUser, "Admin");
+            await _userManager.AddToRoleAsync(powerUser, role);
             _logger.LogInformation($"Admin created: {powerUser.UserName}");
         }
 
@@ -55,11 +55,16 @@ namespace ASCOPC.Infrastructure.Data
                     await CreateRoleAsync(roleName);
             }
 
-            var user = await _userManager.FindByEmailAsync("admin@gmail.com");
-            _logger.LogInformation("Checking administrator account registration");
+            _logger.LogInformation("Checking accounts registration");
 
-            if (user == null)
-                await CreateAdminAsync();
+            if (await _userManager.FindByEmailAsync("admin@gmail.com") is null)
+                await CreateRolesAsync("admin@gmail.com", "admin", "FectourSu1488", "Admin");
+
+            if (await _userManager.FindByEmailAsync("editor@gmail.com") is null)
+                await CreateRolesAsync("editor@gmail.com", "editor", "Moderator1488", "Moderator");
+
+            if (await _userManager.FindByEmailAsync("user@gmail.com") is null)
+                await CreateRolesAsync("user@gmail.com", "user", "User1488", "User");
         }
 
         public static void Initialize(ModelBuilder builder)

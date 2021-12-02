@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASCOPC.Infrastructure.Migrations
 {
-    public partial class initialize : Migration
+    public partial class Initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -206,10 +206,8 @@ namespace ASCOPC.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Index = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Categories = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -234,7 +232,6 @@ namespace ASCOPC.Infrastructure.Migrations
                     Name = table.Column<string>(type: "varchar(300)", unicode: false, maxLength: 300, nullable: false),
                     Price = table.Column<decimal>(type: "decimal", nullable: false),
                     UrlImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Feture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InStock = table.Column<bool>(type: "bit", nullable: false),
                     Rating = table.Column<decimal>(type: "decimal(5,2)", nullable: true),
                     Desciption = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -290,6 +287,26 @@ namespace ASCOPC.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "ComponentsTypes",
+                columns: new[] { "Id", "CreateAt", "Name", "UpdateAt" },
+                values: new object[] { 1, new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(5033), "Процессор", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Manufacturers",
+                columns: new[] { "Id", "CreateAt", "Name", "UpdateAt" },
+                values: new object[] { 1, new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(4888), "AMD", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Manufacturers",
+                columns: new[] { "Id", "CreateAt", "Name", "UpdateAt" },
+                values: new object[] { 2, new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(4899), "Intel", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Components",
+                columns: new[] { "Id", "BuildsId", "Code", "CreateAt", "Desciption", "InStock", "ManufacturerId", "Name", "Price", "Rating", "TypeId", "UpdateAt", "UrlImage" },
+                values: new object[] { 1, null, 1372637, new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(5047), "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует высоким уровнем производительности подавляющее большинство пользователей. Устройство будет уверенно себя чувствовать в составе мощной игровой системы. Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. Важной особенностью процессора является очень большой объем кэша третьего уровня: величина этого показателя равна 32 МБ. Объем кэша L2 – 3 МБ.", true, 1, "AM4, 6 x 3600 МГц, L2 - 3 МБ, L3 - 32 МБ, 2хDDR4-3200 МГц, TDP 65 Вт", 17.699m, 4.5m, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://c.dns-shop.ru/thumb/st4/fit/500/500/6e55c08c071d9744dba9a9582eafd812/fc1ee4a47dc4a1740799e996bf0d478f8908764c5f55f176f6b0bc0ca5f5eef2.jpg.webp" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

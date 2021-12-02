@@ -37,7 +37,7 @@ namespace ASOPC.Application.Features.Components.Commands.Create
                     await repository.AddEntity(entity);
                     await _unitOfWork.SaveChangeAsync(cancellationToken);
                 }
-                catch (Exception ex)
+                catch
                 {
                     if (entity is not null)
                     {
@@ -45,7 +45,7 @@ namespace ASOPC.Application.Features.Components.Commands.Create
                         await _componentService.TryUpdateAsync(entity);
                     }
 
-                    result.AppendError(ex.Message);
+                    result.AppendError($"{entity?.Name} has been changed");
                 }
 
                 return result.BuildResult();

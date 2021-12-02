@@ -6,6 +6,8 @@ using ASCOPC.Shared.DTO;
 using ASOPC.Application.Interfaces.Data;
 using ASOPC.Application.Interfaces.Services;
 using AutoMapper;
+using ASCOPC.Domain.Entities;
+using ASCOPC.Infrastructure.Entities;
 
 namespace ASCOPC.Infrastructure.Services
 {
@@ -14,6 +16,9 @@ namespace ASCOPC.Infrastructure.Services
         private readonly IMapper _mapper;
         private readonly IRepositoryAsync<Builds> _repository;
         private readonly IUnitOfWork _unitOfWork;
+
+        // TODO: remove dependency
+        private IRepositoryAsync<Component> _repoComponent => _unitOfWork.Repository<Component>();
 
         public BuildsService(IMapper mapper, IUnitOfWork unitOfWork)
         {
@@ -37,11 +42,19 @@ namespace ASCOPC.Infrastructure.Services
 
             return result.BuildResult();
         }
-        public async Task<IResult> UpdateAsync(BuildsDTO build, int id)
+
+        public async Task<IResult> UpdateAsync(BuildsComponentsDTO build, int id)
         {
             var result = OperationResult.CreateBuilder();
 
+            if (build is null)
+               return result.AppendError($"{build} is empty")
+                    .BuildResult();
+
             var entity = _mapper.Map<Builds>(build);
+            var entitybuild = _mapper.Map<BuildsComponent>(build);
+
+            entitybuild.Components = await GetComponentsByBuilds(build);
             entity.UpdateAt = DateTime.Now;
 
             await _repository.UpdateEntity(entity, id);
@@ -49,13 +62,15 @@ namespace ASCOPC.Infrastructure.Services
 
             return result.BuildResult();
         }
+
         public async Task<IResult<IEnumerable<BuildsDTO>>> GetAllAsync()
         {
             var result = OperationResult<IEnumerable<BuildsDTO>>.CreateBuilder();
             var entity = _mapper.Map<IEnumerable<BuildsDTO>>(await _repository.GetAllAsync());
 
             if (entity is null)
-                result.AppendError($"{entity} is null");
+                return result.AppendError($"{entity} is null")
+                    .BuildResult();
 
             return result.SetValue(entity).BuildResult();
         }
@@ -70,21 +85,44 @@ namespace ASCOPC.Infrastructure.Services
 
             return result.SetValue(entity).BuildResult();
         }
-        public Task<IResult> InsertAsync(BuildsDTO build)
+
+        private async Task<ICollection<Component>> GetComponentsByBuilds(BuildsComponentsDTO build)
         {
+            List<Component> components = new();
+
+            foreach (var componentId in build.ComponentsIds)
+            {
+                var component = await _repoComponent.GetByIdAsync(componentId);
+
+                if (component is not null)
+                    components.Add(component);
+            }
+
+            return components;
+        }
+  
+
+        public async Task<IResult> InsertAsync(BuildsComponentsDTO build)
+        {           
             var result = OperationResult.CreateBuilder();
 
             if (build is null)
-                result.AppendError($"Build is empty");
+                return result.AppendError($"{build} is empty")
+                    .BuildResult();
 
             var entity = _mapper.Map<Builds>(build);
-            entity.CreateAt = DateTime.Now;
+            var entitybuilds = _mapper.Map<BuildsComponent>(build);
 
-            _repository.AddEntity(entity);
+            entitybuilds.Components = await GetComponentsByBuilds(build);
+            entitybuilds.Builds = entity;
+ 
+            entity.CreateAt = DateTime.Now;
+            
+            await _repository.AddEntity(entity);
 
             _unitOfWork.SaveChanges();
 
-            return Task.FromResult(result.BuildResult());
+            return result.BuildResult();
         }
     }
 }

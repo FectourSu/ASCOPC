@@ -7,8 +7,8 @@ namespace ASOPC.Application.Interfaces.Services
     {
         Task<IResult<BuildsDTO>> GetAsync(int id);
         Task<IResult<IEnumerable<BuildsDTO>>> GetAllAsync();
-        Task<IResult> InsertAsync(BuildsDTO build);
-        Task<IResult> UpdateAsync(BuildsDTO build, int id);
+        Task<IResult> InsertAsync(BuildsComponentsDTO build);
+        Task<IResult> UpdateAsync(BuildsComponentsDTO build, int id);
         Task<IResult> DeleteAsync(int id);
     }
 }

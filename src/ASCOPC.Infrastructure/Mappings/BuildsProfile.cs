@@ -10,6 +10,11 @@ namespace ASCOPC.Infrastructure.Mappings
         {
             CreateMap<Builds, BuildsDTO>();
             CreateMap<BuildsDTO, Builds>();
+
+            CreateMap<Builds, BuildsComponentsDTO>()
+                .ForMember(c => c.ComponentsIds, opt => opt.Ignore());
+            CreateMap<BuildsComponentsDTO, Builds>()
+                .ForMember(c => c.Components, opt => opt.Ignore());           
         }
     }
 }

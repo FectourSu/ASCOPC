@@ -30,11 +30,11 @@ namespace ASCOPC.Server.Controllers
             Ok(await _buildsService.GetAllAsync());
 
         [HttpPost]
-        public async Task<ActionResult<IResult>> Add([FromBody]BuildsDTO builds) =>
+        public async Task<ActionResult<IResult>> Add([FromBody]BuildsComponentsDTO builds) =>
             Ok(await _buildsService.InsertAsync(builds));
 
         [HttpPut]
-        public async Task<ActionResult<IResult>> Update([FromBody] BuildsDTO builds, int id) =>
+        public async Task<ActionResult<IResult>> Update([FromBody] BuildsComponentsDTO builds, int id) =>
             Ok(await _buildsService.UpdateAsync(builds, id));
 
         [HttpDelete("{id}")]

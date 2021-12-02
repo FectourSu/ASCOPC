@@ -87,7 +87,7 @@ namespace ASCOPC.Infrastructure.Migrations
                         {
                             Id = 1,
                             Code = 1372637,
-                            CreateAt = new DateTime(2021, 11, 30, 13, 29, 46, 874, DateTimeKind.Local).AddTicks(4200),
+                            CreateAt = new DateTime(2021, 12, 3, 0, 14, 54, 370, DateTimeKind.Local).AddTicks(5808),
                             Desciption = "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует высоким уровнем производительности подавляющее большинство пользователей. Устройство будет уверенно себя чувствовать в составе мощной игровой системы. Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. Важной особенностью процессора является очень большой объем кэша третьего уровня: величина этого показателя равна 32 МБ. Объем кэша L2 – 3 МБ.",
                             InStock = true,
                             ManufacturerId = 1,
@@ -131,7 +131,7 @@ namespace ASCOPC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2021, 11, 30, 13, 29, 46, 874, DateTimeKind.Local).AddTicks(4187),
+                            CreateAt = new DateTime(2021, 12, 3, 0, 14, 54, 370, DateTimeKind.Local).AddTicks(5793),
                             Name = "Процессор",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -168,14 +168,14 @@ namespace ASCOPC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2021, 11, 30, 13, 29, 46, 874, DateTimeKind.Local).AddTicks(4042),
+                            CreateAt = new DateTime(2021, 12, 3, 0, 14, 54, 370, DateTimeKind.Local).AddTicks(5609),
                             Name = "AMD",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2021, 11, 30, 13, 29, 46, 874, DateTimeKind.Local).AddTicks(4052),
+                            CreateAt = new DateTime(2021, 12, 3, 0, 14, 54, 370, DateTimeKind.Local).AddTicks(5623),
                             Name = "Intel",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -250,7 +250,6 @@ namespace ASCOPC.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -504,9 +503,7 @@ namespace ASCOPC.Infrastructure.Migrations
                 {
                     b.HasOne("ASCOPC.Infrastructure.Data.Entities.User", "User")
                         .WithMany("Builds")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });

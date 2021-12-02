@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace ASCOPC.Infrastructure.Extensions
 {
@@ -24,6 +25,9 @@ namespace ASCOPC.Infrastructure.Extensions
             collection.AddScoped<IFillComponentProvider, FillComponentProvider>();
             collection.AddScoped<IBuildsService, BuildsService>();
             collection.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+
+            // builds map
+            collection.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             collection.AddDbContext<ApplicationDbContext>(options =>
              {

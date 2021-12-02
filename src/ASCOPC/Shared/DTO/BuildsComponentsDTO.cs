@@ -2,12 +2,12 @@
 
 namespace ASCOPC.Shared.DTO
 {
-    public class BuildsDTO
+    public class BuildsComponentsDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public Guid UserId { get; set; }
         public Category Categories { get; set; }
-        public ICollection<ComponentsDTO> Components { get; set; }
+        public IEnumerable<int> ComponentsIds { get; set; }
     }
 }
