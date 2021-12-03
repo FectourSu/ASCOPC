@@ -23,7 +23,7 @@ namespace ASCOPC.Infrastructure.Data
 
             _logger.LogInformation($"Created role: {roleName}");
         }
-        
+
         private static async Task CreateRolesAsync(string email, string username, string password, string role)
         {
             var powerUser = new User(email: email, userName: username);
@@ -89,7 +89,7 @@ namespace ASCOPC.Infrastructure.Data
                     }
               });
 
-           
+
             builder.Entity<ComponentType>().HasData(
               new ComponentType[]
               {
