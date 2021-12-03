@@ -10,7 +10,7 @@
 
 # About
 This project is a computer build service <br>
-It is being developed following the example of clean architecture (DDD) <br>
+It is being developed following the example of clean architecture according to the DDD design method <br>
 ### Source of inspiration
 [Biolerplate](https://github.com/aspnetcorehero/Boilerplate)
 [Ember](https://github.com/TheWayToJunior/Ember-Refactoring)
