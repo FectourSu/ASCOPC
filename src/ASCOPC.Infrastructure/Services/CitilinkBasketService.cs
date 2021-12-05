@@ -57,7 +57,7 @@ namespace ASCOPC.Infrastructure.Services
                         process.StartInfo.FileName = GetPath();
                         process.StartInfo.Arguments = navigate.Url + " --new-window";
                         process.Start();
-                        process.WaitForExit(10000); // Dodge the 429 response
+                        await process.WaitForExitAsync(); // Dodge the 429 response
                     }
                     catch (Exception) 
                     {

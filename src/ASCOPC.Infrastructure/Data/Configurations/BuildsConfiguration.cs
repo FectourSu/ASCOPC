@@ -1,4 +1,4 @@
-﻿using ASCOPC.Infrastructure.Data.Entities;
+﻿using ASCOPC.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,9 +17,6 @@ namespace ASCOPC.Infrastructure.Data.Configurations
 
             builder.Property(c => c.Categories)
                 .IsRequired();
-
-            builder.HasOne(u => u.User)
-                .WithMany(u => u.Builds);
         }
     }
 }

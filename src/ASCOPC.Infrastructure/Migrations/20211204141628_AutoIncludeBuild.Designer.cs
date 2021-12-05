@@ -4,6 +4,7 @@ using ASCOPC.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASCOPC.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211204141628_AutoIncludeBuild")]
+    partial class AutoIncludeBuild
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +111,7 @@ namespace ASCOPC.Infrastructure.Migrations
                         {
                             Id = 1,
                             Code = 1372637,
-                            CreateAt = new DateTime(2021, 12, 4, 19, 2, 47, 385, DateTimeKind.Local).AddTicks(3404),
+                            CreateAt = new DateTime(2021, 12, 4, 17, 16, 28, 236, DateTimeKind.Local).AddTicks(6197),
                             Desciption = "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует высоким уровнем производительности подавляющее большинство пользователей. Устройство будет уверенно себя чувствовать в составе мощной игровой системы. Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. Важной особенностью процессора является очень большой объем кэша третьего уровня: величина этого показателя равна 32 МБ. Объем кэша L2 – 3 МБ.",
                             InStock = true,
                             ManufacturerId = 1,
@@ -168,7 +170,7 @@ namespace ASCOPC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2021, 12, 4, 19, 2, 47, 385, DateTimeKind.Local).AddTicks(3376),
+                            CreateAt = new DateTime(2021, 12, 4, 17, 16, 28, 236, DateTimeKind.Local).AddTicks(6174),
                             Name = "Процессор",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -205,14 +207,14 @@ namespace ASCOPC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2021, 12, 4, 19, 2, 47, 385, DateTimeKind.Local).AddTicks(3184),
+                            CreateAt = new DateTime(2021, 12, 4, 17, 16, 28, 236, DateTimeKind.Local).AddTicks(5996),
                             Name = "AMD",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2021, 12, 4, 19, 2, 47, 385, DateTimeKind.Local).AddTicks(3195),
+                            CreateAt = new DateTime(2021, 12, 4, 17, 16, 28, 236, DateTimeKind.Local).AddTicks(6009),
                             Name = "Intel",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });

@@ -18,13 +18,14 @@ namespace ASOPC.Application.Mappings
                 .ForMember(c => c.Id, opt => opt.Ignore())
                 .ForMember(c => c.CreateAt, opt => opt.Ignore());
 
+            CreateMap<ComponentsDTO, Component>();
             CreateMap<Component, ComponentsDTO>()
-                .ForMember(c => c.Specification, opt => opt.Ignore())
-                .ForMember(c => c.Manufacturer, opt => opt.Ignore())
-                .ForMember(c => c.Type, opt => opt.Ignore());
+                .ForMember(c => c.Specification, opt => 
+                    opt.MapFrom(c => c.SpecificationComponent.Where(sc => sc.ComponentId == c.Id).Select(sc => sc.Specifications)))
+                .ForMember(c => c.Manufacturer, opt => opt.MapFrom(s => s.Manufacturer.Name))
+                .ForMember(c => c.Type, opt => opt.MapFrom(s=> s.Type.Name));
 
             CreateMap<Component, GetComponentResponse>();
-
             CreateMap<CreateComponentCommand, Component>()
                 .ForMember(c => c.SpecificationComponent, opt => opt.Ignore())
                 .ForMember(c => c.Manufacturer, opt => opt.Ignore())

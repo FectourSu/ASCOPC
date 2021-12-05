@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using ASCOPC.Domain.Entities;
+﻿using ASCOPC.Domain.Entities;
 using ASCOPC.Infrastructure.Data.Entities;
+using ASCOPC.Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASCOPC.Infrastructure.Data
 {
@@ -25,7 +26,9 @@ namespace ASCOPC.Infrastructure.Data
         public DbSet<Manufacturer> Manufacturers { get; set; }
         public DbSet<Specifications> Specifications { get; set; }
         public DbSet<Builds> Builds { get; set; }
-        public DbSet<ComponentType> ComponentTypes { get; set; } 
+        public DbSet<UserBuilds> UsersBuilds { get; set; }
+        public DbSet<ComponentBuilds> ComponentBuilds { get; set; }
+        public DbSet<ComponentType> ComponentTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

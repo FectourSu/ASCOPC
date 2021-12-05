@@ -32,11 +32,11 @@ namespace ASCOPC.Infrastructure.Parser
             options.AddArgument("headless");
 
             IWebDriver driver = new ChromeDriver(Directory.GetCurrentDirectory(), options);
-
+            
             try
             {
                 driver.Navigate().GoToUrl(this.Uri);
-                return driver.PageSource;
+                return await Task.FromResult(driver.PageSource);
             }
             catch (Exception)
             {

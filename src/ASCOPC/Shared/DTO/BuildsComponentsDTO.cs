@@ -6,8 +6,8 @@ namespace ASCOPC.Shared.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public Guid UserId { get; set; }
+        public string? UserId { get; set; }
         public Category Categories { get; set; }
-        public IEnumerable<int> ComponentsIds { get; set; }
+        public IEnumerable<int>? ComponentsIds { get; set; }
     }
 }

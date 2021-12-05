@@ -31,6 +31,10 @@ namespace ASCOPC.Infrastructure.Data.Configurations
                 .WithOne(s => s.Component)
                 .HasForeignKey(s => s.ComponentId)
                 .IsRequired();
+
+            builder.Navigation(s => s.Manufacturer).AutoInclude();
+            builder.Navigation(s => s.SpecificationComponent).AutoInclude();
+            builder.Navigation(s => s.Type).AutoInclude();
         }
     }
 }

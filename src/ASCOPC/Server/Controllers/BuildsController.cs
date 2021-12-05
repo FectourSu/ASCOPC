@@ -25,17 +25,21 @@ namespace ASCOPC.Server.Controllers
         public async Task<ActionResult<IResult>> Get(int id) =>
             Ok(await _buildsService.GetAsync(id));
 
+        [HttpGet, Route("[action]/{userId}")]
+        public async Task<ActionResult<IResult>> GetUserBuild(string userId) =>
+            Ok(await _buildsService.GetUserBuildAsync(userId));
+
         [HttpGet]
         public async Task<ActionResult<IResult>> Get() =>
             Ok(await _buildsService.GetAllAsync());
 
         [HttpPost]
-        public async Task<ActionResult<IResult>> Add([FromBody]BuildsComponentsDTO builds) =>
-            Ok(await _buildsService.InsertAsync(builds));
+        public async Task<ActionResult<IResult>> Add([FromBody]BuildsComponentsDTO build) =>
+            Ok(await _buildsService.InsertAsync(build));
 
         [HttpPut]
-        public async Task<ActionResult<IResult>> Update([FromBody] BuildsComponentsDTO builds, int id) =>
-            Ok(await _buildsService.UpdateAsync(builds, id));
+        public async Task<ActionResult<IResult>> Update([FromBody] BuildsComponentsDTO build) =>
+            Ok(await _buildsService.UpdateAsync(build));
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<IResult>> Delete(int id) =>

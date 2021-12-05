@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASCOPC.Infrastructure.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,22 @@ namespace ASCOPC.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Builds",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Categories = table.Column<int>(type: "int", nullable: false),
+                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Builds", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -201,24 +217,25 @@ namespace ASCOPC.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Builds",
+                name: "UsersBuilds",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Categories = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    BuildId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Builds", x => x.Id);
+                    table.PrimaryKey("PK_UsersBuilds", x => new { x.UserId, x.BuildId });
                     table.ForeignKey(
-                        name: "FK_Builds_AspNetUsers_UserId",
+                        name: "FK_UsersBuilds_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsersBuilds_Builds_BuildId",
+                        column: x => x.BuildId,
+                        principalTable: "Builds",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -238,18 +255,12 @@ namespace ASCOPC.Infrastructure.Migrations
                     Code = table.Column<int>(type: "int", nullable: false),
                     ManufacturerId = table.Column<int>(type: "int", nullable: false),
                     TypeId = table.Column<int>(type: "int", nullable: false),
-                    BuildsId = table.Column<int>(type: "int", nullable: true),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Components", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Components_Builds_BuildsId",
-                        column: x => x.BuildsId,
-                        principalTable: "Builds",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Components_ComponentsTypes_TypeId",
                         column: x => x.TypeId,
@@ -260,6 +271,30 @@ namespace ASCOPC.Infrastructure.Migrations
                         name: "FK_Components_Manufacturers_ManufacturerId",
                         column: x => x.ManufacturerId,
                         principalTable: "Manufacturers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ComponentBuilds",
+                columns: table => new
+                {
+                    BuildId = table.Column<int>(type: "int", nullable: false),
+                    ComponentId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ComponentBuilds", x => new { x.ComponentId, x.BuildId });
+                    table.ForeignKey(
+                        name: "FK_ComponentBuilds_Builds_BuildId",
+                        column: x => x.BuildId,
+                        principalTable: "Builds",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ComponentBuilds_Components_ComponentId",
+                        column: x => x.ComponentId,
+                        principalTable: "Components",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -291,22 +326,22 @@ namespace ASCOPC.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "ComponentsTypes",
                 columns: new[] { "Id", "CreateAt", "Name", "UpdateAt" },
-                values: new object[] { 1, new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(5033), "Процессор", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, new DateTime(2021, 12, 4, 16, 2, 17, 917, DateTimeKind.Local).AddTicks(9242), "Процессор", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Manufacturers",
                 columns: new[] { "Id", "CreateAt", "Name", "UpdateAt" },
-                values: new object[] { 1, new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(4888), "AMD", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, new DateTime(2021, 12, 4, 16, 2, 17, 917, DateTimeKind.Local).AddTicks(9011), "AMD", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Manufacturers",
                 columns: new[] { "Id", "CreateAt", "Name", "UpdateAt" },
-                values: new object[] { 2, new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(4899), "Intel", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 2, new DateTime(2021, 12, 4, 16, 2, 17, 917, DateTimeKind.Local).AddTicks(9024), "Intel", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Components",
-                columns: new[] { "Id", "BuildsId", "Code", "CreateAt", "Desciption", "InStock", "ManufacturerId", "Name", "Price", "Rating", "TypeId", "UpdateAt", "UrlImage" },
-                values: new object[] { 1, null, 1372637, new DateTime(2021, 12, 3, 0, 10, 44, 646, DateTimeKind.Local).AddTicks(5047), "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует высоким уровнем производительности подавляющее большинство пользователей. Устройство будет уверенно себя чувствовать в составе мощной игровой системы. Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. Важной особенностью процессора является очень большой объем кэша третьего уровня: величина этого показателя равна 32 МБ. Объем кэша L2 – 3 МБ.", true, 1, "AM4, 6 x 3600 МГц, L2 - 3 МБ, L3 - 32 МБ, 2хDDR4-3200 МГц, TDP 65 Вт", 17.699m, 4.5m, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://c.dns-shop.ru/thumb/st4/fit/500/500/6e55c08c071d9744dba9a9582eafd812/fc1ee4a47dc4a1740799e996bf0d478f8908764c5f55f176f6b0bc0ca5f5eef2.jpg.webp" });
+                columns: new[] { "Id", "Code", "CreateAt", "Desciption", "InStock", "ManufacturerId", "Name", "Price", "Rating", "TypeId", "UpdateAt", "UrlImage" },
+                values: new object[] { 1, 1372637, new DateTime(2021, 12, 4, 16, 2, 17, 917, DateTimeKind.Local).AddTicks(9261), "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует высоким уровнем производительности подавляющее большинство пользователей. Устройство будет уверенно себя чувствовать в составе мощной игровой системы. Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. Важной особенностью процессора является очень большой объем кэша третьего уровня: величина этого показателя равна 32 МБ. Объем кэша L2 – 3 МБ.", true, 1, "AM4, 6 x 3600 МГц, L2 - 3 МБ, L3 - 32 МБ, 2хDDR4-3200 МГц, TDP 65 Вт", 17.699m, 4.5m, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "https://c.dns-shop.ru/thumb/st4/fit/500/500/6e55c08c071d9744dba9a9582eafd812/fc1ee4a47dc4a1740799e996bf0d478f8908764c5f55f176f6b0bc0ca5f5eef2.jpg.webp" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -348,14 +383,9 @@ namespace ASCOPC.Infrastructure.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Builds_UserId",
-                table: "Builds",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Components_BuildsId",
-                table: "Components",
-                column: "BuildsId");
+                name: "IX_ComponentBuilds_BuildId",
+                table: "ComponentBuilds",
+                column: "BuildId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Components_ManufacturerId",
@@ -389,6 +419,11 @@ namespace ASCOPC.Infrastructure.Migrations
                 name: "IX_Specifications_Id",
                 table: "Specifications",
                 column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersBuilds_BuildId",
+                table: "UsersBuilds",
+                column: "BuildId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -409,7 +444,13 @@ namespace ASCOPC.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "ComponentBuilds");
+
+            migrationBuilder.DropTable(
                 name: "SpecificationsComponents");
+
+            migrationBuilder.DropTable(
+                name: "UsersBuilds");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -421,6 +462,9 @@ namespace ASCOPC.Infrastructure.Migrations
                 name: "Specifications");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Builds");
 
             migrationBuilder.DropTable(
@@ -428,9 +472,6 @@ namespace ASCOPC.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Manufacturers");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }

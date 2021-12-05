@@ -21,7 +21,7 @@ namespace ASCOPC.Infrastructure.Data.Configurations
 
             builder.HasMany(c => c.SpecificationComponent)
                 .WithOne(s => s.Specifications)
-                .HasForeignKey(s => s.ComponentId)
+                .HasForeignKey(s => s.SpecificationId)
                 .IsRequired();
         }
     }

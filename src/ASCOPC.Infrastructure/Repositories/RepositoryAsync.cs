@@ -31,7 +31,7 @@ namespace ASCOPC.Infrastructure.Repositories
         }
 
         public async Task<List<TEntity>> GetAllAsync() =>
-            await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
+            await _dbContext.Set<TEntity>().AsNoTrackingWithIdentityResolution().ToListAsync();
 
         public virtual async Task<TEntity> GetByIdAsync(int id) => 
             await _dbContext.Set<TEntity>().FindAsync(id);
@@ -54,5 +54,9 @@ namespace ASCOPC.Infrastructure.Repositories
 
             return Task.CompletedTask;
         }
+
+        public async Task<TEntity> GetByIdAsync(string id) => 
+            await _dbContext.Set<TEntity>().FindAsync(id);
+        
     }
 }

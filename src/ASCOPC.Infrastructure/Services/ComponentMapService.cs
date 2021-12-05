@@ -121,7 +121,7 @@ namespace ASCOPC.Infrastructure.Services
                 await repository.UpdateEntity(entity, entity.Id);
                 _unitOfWork.SaveChanges();
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

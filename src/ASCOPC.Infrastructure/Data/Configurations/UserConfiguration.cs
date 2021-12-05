@@ -12,9 +12,6 @@ namespace ASCOPC.Infrastructure.Data.Configurations
                 .WithOne(u => u.User)
                 .HasForeignKey(u => u.UserId)
                 .IsRequired();
-
-            builder.HasMany(b => b.Builds)
-               .WithOne(u => u.User);
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASCOPC.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211202211454_FixBuilds")]
-    partial class FixBuilds
+    [Migration("20211204144955_AutoIncludeComponent")]
+    partial class AutoIncludeComponent
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace ASCOPC.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ASCOPC.Domain.Entities.Component", b =>
+            modelBuilder.Entity("ASCOPC.Domain.Entities.Builds", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,8 +32,32 @@ namespace ASCOPC.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("BuildsId")
+                    b.Property<int>("Categories")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreateAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("UpdateAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Builds", (string)null);
+                });
+
+            modelBuilder.Entity("ASCOPC.Domain.Entities.Component", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("Code")
                         .HasColumnType("int");
@@ -73,8 +97,6 @@ namespace ASCOPC.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BuildsId");
-
                     b.HasIndex("ManufacturerId");
 
                     b.HasIndex("Name")
@@ -89,7 +111,7 @@ namespace ASCOPC.Infrastructure.Migrations
                         {
                             Id = 1,
                             Code = 1372637,
-                            CreateAt = new DateTime(2021, 12, 3, 0, 14, 54, 370, DateTimeKind.Local).AddTicks(5808),
+                            CreateAt = new DateTime(2021, 12, 4, 17, 49, 55, 418, DateTimeKind.Local).AddTicks(3257),
                             Desciption = "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует высоким уровнем производительности подавляющее большинство пользователей. Устройство будет уверенно себя чувствовать в составе мощной игровой системы. Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. Важной особенностью процессора является очень большой объем кэша третьего уровня: величина этого показателя равна 32 МБ. Объем кэша L2 – 3 МБ.",
                             InStock = true,
                             ManufacturerId = 1,
@@ -100,6 +122,21 @@ namespace ASCOPC.Infrastructure.Migrations
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UrlImage = "https://c.dns-shop.ru/thumb/st4/fit/500/500/6e55c08c071d9744dba9a9582eafd812/fc1ee4a47dc4a1740799e996bf0d478f8908764c5f55f176f6b0bc0ca5f5eef2.jpg.webp"
                         });
+                });
+
+            modelBuilder.Entity("ASCOPC.Domain.Entities.ComponentBuilds", b =>
+                {
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BuildId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ComponentId", "BuildId");
+
+                    b.HasIndex("BuildId");
+
+                    b.ToTable("ComponentBuilds");
                 });
 
             modelBuilder.Entity("ASCOPC.Domain.Entities.ComponentType", b =>
@@ -133,7 +170,7 @@ namespace ASCOPC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2021, 12, 3, 0, 14, 54, 370, DateTimeKind.Local).AddTicks(5793),
+                            CreateAt = new DateTime(2021, 12, 4, 17, 49, 55, 418, DateTimeKind.Local).AddTicks(3234),
                             Name = "Процессор",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -170,14 +207,14 @@ namespace ASCOPC.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2021, 12, 3, 0, 14, 54, 370, DateTimeKind.Local).AddTicks(5609),
+                            CreateAt = new DateTime(2021, 12, 4, 17, 49, 55, 418, DateTimeKind.Local).AddTicks(3007),
                             Name = "AMD",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2021, 12, 3, 0, 14, 54, 370, DateTimeKind.Local).AddTicks(5623),
+                            CreateAt = new DateTime(2021, 12, 4, 17, 49, 55, 418, DateTimeKind.Local).AddTicks(3022),
                             Name = "Intel",
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -227,38 +264,6 @@ namespace ASCOPC.Infrastructure.Migrations
                     b.HasIndex("Id");
 
                     b.ToTable("Specifications", (string)null);
-                });
-
-            modelBuilder.Entity("ASCOPC.Infrastructure.Data.Entities.Builds", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("Categories")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Builds", (string)null);
                 });
 
             modelBuilder.Entity("ASCOPC.Infrastructure.Data.Entities.Role", b =>
@@ -368,6 +373,21 @@ namespace ASCOPC.Infrastructure.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("ASCOPC.Infrastructure.Entities.UserBuilds", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("BuildId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "BuildId");
+
+                    b.HasIndex("BuildId");
+
+                    b.ToTable("UsersBuilds");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -461,10 +481,6 @@ namespace ASCOPC.Infrastructure.Migrations
 
             modelBuilder.Entity("ASCOPC.Domain.Entities.Component", b =>
                 {
-                    b.HasOne("ASCOPC.Infrastructure.Data.Entities.Builds", null)
-                        .WithMany("Components")
-                        .HasForeignKey("BuildsId");
-
                     b.HasOne("ASCOPC.Domain.Entities.Manufacturer", "Manufacturer")
                         .WithMany("Components")
                         .HasForeignKey("ManufacturerId")
@@ -480,6 +496,25 @@ namespace ASCOPC.Infrastructure.Migrations
                     b.Navigation("Manufacturer");
 
                     b.Navigation("Type");
+                });
+
+            modelBuilder.Entity("ASCOPC.Domain.Entities.ComponentBuilds", b =>
+                {
+                    b.HasOne("ASCOPC.Domain.Entities.Builds", "Build")
+                        .WithMany()
+                        .HasForeignKey("BuildId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASCOPC.Domain.Entities.Component", "Components")
+                        .WithMany()
+                        .HasForeignKey("ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Build");
+
+                    b.Navigation("Components");
                 });
 
             modelBuilder.Entity("ASCOPC.Domain.Entities.SpecificationComponent", b =>
@@ -501,15 +536,6 @@ namespace ASCOPC.Infrastructure.Migrations
                     b.Navigation("Specifications");
                 });
 
-            modelBuilder.Entity("ASCOPC.Infrastructure.Data.Entities.Builds", b =>
-                {
-                    b.HasOne("ASCOPC.Infrastructure.Data.Entities.User", "User")
-                        .WithMany("Builds")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("ASCOPC.Infrastructure.Data.Entities.UserRoles", b =>
                 {
                     b.HasOne("ASCOPC.Infrastructure.Data.Entities.Role", "Role")
@@ -525,6 +551,25 @@ namespace ASCOPC.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ASCOPC.Infrastructure.Entities.UserBuilds", b =>
+                {
+                    b.HasOne("ASCOPC.Domain.Entities.Builds", "Build")
+                        .WithMany()
+                        .HasForeignKey("BuildId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ASCOPC.Infrastructure.Data.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Build");
 
                     b.Navigation("User");
                 });
@@ -585,11 +630,6 @@ namespace ASCOPC.Infrastructure.Migrations
                     b.Navigation("SpecificationComponent");
                 });
 
-            modelBuilder.Entity("ASCOPC.Infrastructure.Data.Entities.Builds", b =>
-                {
-                    b.Navigation("Components");
-                });
-
             modelBuilder.Entity("ASCOPC.Infrastructure.Data.Entities.Role", b =>
                 {
                     b.Navigation("UserRoles");
@@ -597,8 +637,6 @@ namespace ASCOPC.Infrastructure.Migrations
 
             modelBuilder.Entity("ASCOPC.Infrastructure.Data.Entities.User", b =>
                 {
-                    b.Navigation("Builds");
-
                     b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618

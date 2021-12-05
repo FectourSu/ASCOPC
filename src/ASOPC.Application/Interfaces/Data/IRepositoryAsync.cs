@@ -7,6 +7,8 @@
 
         Task<TEntity> GetByIdAsync(int id);
 
+        Task<TEntity> GetByIdAsync(string id);
+
         Task<List<TEntity>> GetAllAsync();
 
         Task<List<TEntity>> GetPagedResponseAsync(int number, int pagesize);

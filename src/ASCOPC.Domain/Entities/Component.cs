@@ -16,5 +16,6 @@ namespace ASCOPC.Domain.Entities
         public int TypeId { get; set; }
         public virtual ComponentType Type { get; set; }
         public virtual ICollection<SpecificationComponent> SpecificationComponent { get; set; }
+        public virtual ICollection<ComponentBuilds> ComponentBuilds { get; set; }
     }
 }
