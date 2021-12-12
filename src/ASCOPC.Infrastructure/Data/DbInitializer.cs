@@ -110,7 +110,7 @@ namespace ASCOPC.Infrastructure.Data
                         CreateAt = DateTime.Now,
                         Name = "AM4, 6 x 3600 МГц, L2 - 3 МБ, L3 - 32 МБ, 2хDDR4-3200 МГц, TDP 65 Вт",
                         UrlImage = "https://c.dns-shop.ru/thumb/st4/fit/500/500/6e55c08c071d9744dba9a9582eafd812/fc1ee4a47dc4a1740799e996bf0d478f8908764c5f55f176f6b0bc0ca5f5eef2.jpg.webp",
-                        Desciption = "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует" +
+                        Description = "6-ядерный процессор AMD Ryzen 5 3600 OEM порадует" +
                         " высоким уровнем производительности подавляющее большинство пользователей. " +
                         "Устройство будет уверенно себя чувствовать в составе мощной игровой системы. " +
                         "Базовая частота процессора равна 3600 МГц. Турбочастота – 4200 МГц. " +

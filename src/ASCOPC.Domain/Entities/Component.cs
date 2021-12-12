@@ -9,7 +9,7 @@ namespace ASCOPC.Domain.Entities
         public string? UrlImage { get; set; }
         public bool InStock { get; set; }
         public decimal? Rating { get; set; }
-        public string? Desciption { get; set; }
+        public string? Description { get; set; }
         public int Code { get; set; }
         public int ManufacturerId { get; set; }
         public virtual Manufacturer Manufacturer { get; set; }

@@ -25,7 +25,7 @@ namespace ASCOPC.Infrastructure.Parser.Citilink
             item.Manufacturer = ParseTextContent(document, 
                 "div.ProductCardLayout__breadcrumbs div div div:nth-child(4) a span").Trim();
 
-            item.Desciption = ParseTextContent(document,
+            item.Description = ParseTextContent(document,
                 "div.AboutTab__description-text p:nth-child(1)");
 
             var rating = ParseTextContent(document,

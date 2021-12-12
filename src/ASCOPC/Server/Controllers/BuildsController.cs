@@ -1,12 +1,10 @@
-﻿using ASCOPC.Shared;
-using ASCOPC.Shared.DTO;
-using ASOPC.Application.Interfaces.Services;
+﻿using ASOPC.Application.Features.Builds.Commands.Create;
+using ASOPC.Application.Features.Builds.Commands.Update;
+using ASOPC.Application.Features.Builds.Queries.Get;
+using ASOPC.Application.Features.Builds.Queries.GetAll;
+using ASOPC.Application.Features.Builds.Queries.GetUserBuilds;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ASCOPC.Server.Controllers
 {
@@ -15,34 +13,34 @@ namespace ASCOPC.Server.Controllers
     [ApiController]
     public class BuildsController : ControllerBase
     {
-        private readonly IBuildsService _buildsService;
-        public BuildsController(IBuildsService buildsService)
+        private readonly IMediator _mediator;
+        public BuildsController(IMediator mediator)
         {
-            _buildsService = buildsService;
+            _mediator = mediator;
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<IResult>> Get(int id) =>
-            Ok(await _buildsService.GetAsync(id));
+            Ok(await _mediator.Send(new GetBuildCommand { Id = id }));
 
         [HttpGet, Route("[action]/{userId}")]
         public async Task<ActionResult<IResult>> GetUserBuild(string userId) =>
-            Ok(await _buildsService.GetUserBuildAsync(userId));
+            Ok(await _mediator.Send(new GetUserBuildsCommand() { UserId = userId }));
 
         [HttpGet]
-        public async Task<ActionResult<IResult>> Get() =>
-            Ok(await _buildsService.GetAllAsync());
+        public async Task<ActionResult<IResult>> GetAll() =>
+            Ok(await _mediator.Send(new GetAllBuildCommand()));
 
         [HttpPost]
-        public async Task<ActionResult<IResult>> Add([FromBody]BuildsComponentsDTO build) =>
-            Ok(await _buildsService.InsertAsync(build));
+        public async Task<ActionResult<IResult>> Add([FromBody] CreateBuildCommand command) =>
+            Ok(await _mediator.Send(command));
 
         [HttpPut]
-        public async Task<ActionResult<IResult>> Update([FromBody] BuildsComponentsDTO build) =>
-            Ok(await _buildsService.UpdateAsync(build));
+        public async Task<ActionResult<IResult>> Put([FromBody] UpdateBuildCommand command) =>
+            Ok(await _mediator.Send(command));
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<IResult>> Delete(int id) =>
-            Ok(await _buildsService.DeleteAsync(id));
+            Ok(await _mediator.Send(new DeleteBuildCommand { Id = id }));
     }
 }

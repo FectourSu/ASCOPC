@@ -32,6 +32,7 @@ namespace ASOPC.Application.Features.Components.Commands.Update
                 var repository = _unitOfWork.Repository<Component>();
 
                 var entity = await repository.GetByIdAsync(request.Id);
+                entity.UpdateAt = DateTime.Now;
 
                 await _componentService.ComponentMappingAsync(request, entity);
 

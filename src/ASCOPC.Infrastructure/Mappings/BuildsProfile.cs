@@ -1,5 +1,8 @@
 ﻿using ASCOPC.Domain.Entities;
-using ASCOPC.Shared.DTO;
+using ASOPC.Application.Features.Builds.Commands;
+using ASOPC.Application.Features.Builds.Commands.Create;
+using ASOPC.Application.Features.Builds.Commands.Update;
+using ASOPC.Application.Features.Builds.Queries.Get;
 using AutoMapper;
 
 namespace ASCOPC.Infrastructure.Mappings
@@ -8,20 +11,25 @@ namespace ASCOPC.Infrastructure.Mappings
     {
         public BuildsProfile()
         {
-            CreateMap<Builds, BuildsDTO>();
-            CreateMap<BuildsDTO, Builds>();
+            CreateMap<Builds, GetBuildResponse>();
+            CreateMap<GetBuildResponse, Builds>();
 
-            CreateMap<Builds, BuildsComponentsDTO>()
+            CreateMap<Builds, CreateBuildCommand>()
                 .ForMember(c => c.ComponentsIds, opt => opt.Ignore());
-            CreateMap<BuildsComponentsDTO, ComponentBuilds>()
+            CreateMap<CreateBuildCommand, ComponentBuilds>()
                 .ForMember(c => c.ComponentId, opt => opt.Ignore());
-            //CreateMap<Builds, ComponentBuilds>()
-            //    .ForMember(c => c.Components, opt => opt.Ignore());
 
-
-            CreateMap<Builds, BuildsComponentsDTO>()
+            CreateMap<Builds, BuildCommand>()
                 .ForMember(c => c.ComponentsIds, opt => opt.Ignore());
-            CreateMap<BuildsComponentsDTO, Builds>();
+            CreateMap<BuildCommand, Builds>();
+
+            CreateMap<Builds, CreateBuildCommand>()
+                .ForMember(c => c.ComponentsIds, opt => opt.Ignore());
+            CreateMap<CreateBuildCommand, Builds>();
+
+            CreateMap<Builds, UpdateBuildCommand>()
+                .ForMember(c => c.ComponentsIds, opt => opt.Ignore());
+            CreateMap<UpdateBuildCommand, Builds>();
         }
     }
 }

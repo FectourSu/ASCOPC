@@ -1,10 +1,10 @@
 ﻿using ASCOPC.Domain.Entities;
 using ASCOPC.Shared.DTO;
 using ASOPC.Application.Features.Components.Commands;
-using ASOPC.Application.Features.Components.Commands.Update;
 using ASOPC.Application.Interfaces.Data;
 using ASOPC.Application.Interfaces.Services;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace ASCOPC.Infrastructure.Services
 {
@@ -28,6 +28,31 @@ namespace ASCOPC.Infrastructure.Services
             entity.TypeId = (await GetComponentTypeAsync(request.Type)).Id;
             entity.SpecificationComponent = await GetSpecificationComponentAsync(entity, request.Specification);
         }
+
+        public async Task<IEnumerable<Component>> FilterComponentsBySpecifications(IQueryable<Component> entities, 
+            IEnumerable<Specifications> request)
+        {
+            if (!request?.Any() ?? true)
+                return entities.AsEnumerable();
+
+            var repository = await _unitOfWork.Repository<SpecificationComponent>().GetAllAsync();
+
+            IEnumerable<SpecificationComponent> specifications = null;
+            
+            foreach (var spec in request)
+            {
+                specifications = repository.Where(
+                s => s.Specifications.SpecificationTitle.ToLower() == spec.SpecificationTitle.ToLower() &&
+                     s.Specifications.SpecificationValue.ToLower() == spec.SpecificationValue.ToLower()
+                );
+            }
+
+            var result = specifications.Select(s => s.Component);
+
+            return result;
+        }
+
+
 
         public async Task<ComponentType> GetComponentTypeAsync(string type)
         {

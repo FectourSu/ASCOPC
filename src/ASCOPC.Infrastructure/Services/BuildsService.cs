@@ -5,6 +5,10 @@ using ASCOPC.Infrastructure.Data.Entities;
 using ASCOPC.Infrastructure.Entities;
 using ASCOPC.Shared;
 using ASCOPC.Shared.DTO;
+using ASOPC.Application.Features.Builds.Commands;
+using ASOPC.Application.Features.Builds.Commands.Create;
+using ASOPC.Application.Features.Builds.Commands.Update;
+using ASOPC.Application.Features.Builds.Queries.Get;
 using ASOPC.Application.Interfaces.Data;
 using ASOPC.Application.Interfaces.Services;
 using AutoMapper;
@@ -40,7 +44,7 @@ namespace ASCOPC.Infrastructure.Services
             return result.BuildResult();
         }
 
-        public async Task<IResult> UpdateAsync(BuildsComponentsDTO build)
+        public async Task<IResult> UpdateAsync(UpdateBuildCommand build)
         {
             var result = OperationResult.CreateBuilder();
 
@@ -70,14 +74,14 @@ namespace ASCOPC.Infrastructure.Services
             return result.BuildResult();
         }
 
-        public async Task<IResult<IEnumerable<BuildsDTO>>> GetAllAsync()
+        public async Task<IResult<IEnumerable<GetBuildResponse>>> GetAllAsync()
         {
-            var result = OperationResult<IEnumerable<BuildsDTO>>.CreateBuilder();
+            var result = OperationResult<IEnumerable<GetBuildResponse>>.CreateBuilder();
 
             var builds = await _repository.GetAllAsync();
             var comBuilds = await _unitOfWork.Repository<ComponentBuilds>().GetAllAsync();
 
-            var entity = builds.Select(s => new BuildsDTO()
+            var entity = builds.Select(s => new GetBuildResponse()
             {
                 Id = s.Id,
                 Components = _mapper.Map<ICollection<ComponentsDTO>>(comBuilds
@@ -94,14 +98,14 @@ namespace ASCOPC.Infrastructure.Services
             return result.SetValue(entity).BuildResult();
         }
 
-        public async Task<IResult<BuildsDTO>> GetAsync(int id)
+        public async Task<IResult<GetBuildResponse>> GetAsync(int id)
         {
-            var result = OperationResult<BuildsDTO>.CreateBuilder();
+            var result = OperationResult<GetBuildResponse>.CreateBuilder();
 
             var builds = await _repository.GetByIdAsync(id);
             var comBuilds = await _unitOfWork.Repository<ComponentBuilds>().GetAllAsync();
 
-            var entity = new BuildsDTO()
+            var entity = new GetBuildResponse()
             {
                 Id = builds.Id,
                 Components = _mapper.Map<ICollection<ComponentsDTO>>(comBuilds
@@ -118,28 +122,28 @@ namespace ASCOPC.Infrastructure.Services
             return result.SetValue(entity).BuildResult();
         }
 
-        public async Task<IResult<IEnumerable<BuildsDTO>>> GetUserBuildAsync(string userId)
+        public async Task<IResult<IEnumerable<GetBuildResponse>>> GetUserBuildAsync(string userId)
         {
-            var result = OperationResult<IEnumerable<BuildsDTO>>.CreateBuilder();
+            var result = OperationResult<IEnumerable<GetBuildResponse>>.CreateBuilder();
 
             var userBuilds = _unitOfWork.Repository<UserBuilds>().Entities
                 .Include(ub => ub.Build)
-                .ThenInclude(b => b.ComponentBuilds)
+                    .ThenInclude(b => b.ComponentBuilds)
                 .Where(ub => ub.UserId == userId)
                 .Select(ub => ub.Build);
 
-            var dto = userBuilds.Select(b => new BuildsDTO
+            var dto = await userBuilds.Select(b => new GetBuildResponse
             {
                 Id = b.Id,
                 Name = b.Name,
                 Categories = b.Categories,
                 Components = _mapper.Map<ICollection<ComponentsDTO>>(b.ComponentBuilds.Select(a => a.Components))
-            });
+            }).ToListAsync();
 
             return result.SetValue(dto).BuildResult();
         }
 
-        private async Task<ICollection<Component>> GetComponentsByBuilds(BuildsComponentsDTO build)
+        private async Task<ICollection<Component>> GetComponentsByBuilds(BuildCommand build)
         {
             List<Component> components = new();
             var componentRepository = _unitOfWork.Repository<Component>();
@@ -155,8 +159,7 @@ namespace ASCOPC.Infrastructure.Services
             return components;
         }
 
-
-        public async Task<IResult> InsertAsync(BuildsComponentsDTO build)
+        public async Task<IResult> InsertAsync(CreateBuildCommand build)
         {
             var result = OperationResult.CreateBuilder();
 

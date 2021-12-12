@@ -1,7 +1,6 @@
 ﻿using ASCOPC.Domain.Contracts;
 using ASCOPC.Domain.Entities;
 using ASCOPC.Shared;
-using ASCOPC.Shared.DTO;
 using ASOPC.Application.Interfaces.Data;
 using ASOPC.Application.Interfaces.Services;
 using AutoMapper;
