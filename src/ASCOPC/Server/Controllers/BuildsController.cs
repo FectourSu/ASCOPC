@@ -4,6 +4,8 @@ using ASOPC.Application.Features.Builds.Queries.Get;
 using ASOPC.Application.Features.Builds.Queries.GetAll;
 using ASOPC.Application.Features.Builds.Queries.GetUserBuilds;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASCOPC.Server.Controllers
@@ -11,6 +13,7 @@ namespace ASCOPC.Server.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin, Editor, User")]
     public class BuildsController : ControllerBase
     {
         private readonly IMediator _mediator;

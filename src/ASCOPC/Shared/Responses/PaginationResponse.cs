@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ASCOPC.Shared.Responses
+﻿namespace ASCOPC.Shared.Responses
 {
     public class PaginationResponse<TValue>
     {

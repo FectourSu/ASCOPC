@@ -2,16 +2,13 @@
 
 namespace ASCOPC.Shared.Requests
 {
-    public class MessageRequest
+    public class AuthenticationRequest
     {
-        [Required]
-        public string UserName { get; set; }
-
         [Required]
         [EmailAddress]
         public string Email { get; set; }
 
         [Required]
-        public string TextMessage { get; set; }
+        public string Password { get; set; }
     }
 }

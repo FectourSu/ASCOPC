@@ -1,17 +1,19 @@
-﻿using ASCOPC.Domain.Contracts;
-using ASOPC.Application.Features.Components.Commands.Create;
+﻿using ASOPC.Application.Features.Components.Commands.Create;
 using ASOPC.Application.Features.Components.Commands.Delete;
 using ASOPC.Application.Features.Components.Commands.Update;
 using ASOPC.Application.Features.Components.Queries;
 using ASOPC.Application.Features.Components.Queries.Get;
 using ASOPC.Application.Features.Components.Queries.GetAll;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using IResult = ASCOPC.Domain.Contracts.IResult;
 namespace ASCOPC.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin, Editor")]
     public class ComponentController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -36,11 +38,13 @@ namespace ASCOPC.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IResult>> GetAll() =>
             Ok(await _mediator.Send(new GetAllComponentCommand()));
-
+        
+        [Authorize(Roles = "User")]
         [HttpGet("{id}")]
         public async Task<ActionResult<IResult>> GetById(int id) =>
             Ok(await _mediator.Send(new GetComponentCommand() { Id = id }));
 
+        [Authorize(Roles = "User")]
         [HttpGet, Route("filter/")]
         public async Task<ActionResult<IResult>> GetFiltered([FromBody] GetFilteredComponentCommand components) =>
             Ok(await _mediator.Send(components));

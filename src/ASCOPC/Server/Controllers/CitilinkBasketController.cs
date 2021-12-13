@@ -1,4 +1,6 @@
 ﻿using ASOPC.Application.Interfaces.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using IResult = ASCOPC.Domain.Contracts.IResult;
 
@@ -6,6 +8,7 @@ namespace ASCOPC.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin, Editor, User")]
     public class CitilinkBasketController : ControllerBase
     {
         private readonly ICitilinkBasketService _service;
@@ -16,7 +19,7 @@ namespace ASCOPC.Server.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<IResult>> PushBasket([FromBody]IEnumerable<int> codeProduct) =>
+        public async Task<ActionResult<IResult>> PushBasket([FromBody] IEnumerable<int> codeProduct) =>
             Ok(await _service.Add(codeProduct));
     }
 }
